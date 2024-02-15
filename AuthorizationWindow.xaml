@@ -43,7 +43,7 @@
         
         <Button Grid.Row="5" Grid.Column="1" 
                 Margin="10,10,10,20" 
-                Content="Войти в роли гостя" FontSize="20" Cursor="Hand"/>
+                Content="Войти в роли гостя" FontSize="20" Cursor="Hand" Click="SignInGuest"/>
 
     </Grid>
 </Window>

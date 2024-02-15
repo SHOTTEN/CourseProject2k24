@@ -15,3 +15,6 @@ E:\2022 ДЭ Код 1-1\DishesApplication\obj\Debug\DishesApplication.exe
 E:\2022 ДЭ Код 1-1\DishesApplication\obj\Debug\DishesApplication.pdb
 E:\2022 ДЭ Код 1-1\DishesApplication\obj\Debug\AuthorizationWindow.g.cs
 E:\2022 ДЭ Код 1-1\DishesApplication\obj\Debug\AuthorizationWindow.baml
+E:\2022 ДЭ Код 1-1\DishesApplication\obj\Debug\BaseWindow.g.cs
+E:\2022 ДЭ Код 1-1\DishesApplication\obj\Debug\BaseWindow.baml
+E:\2022 ДЭ Код 1-1\DishesApplication\obj\Debug\GeneratedInternalTypeHelper.g.cs

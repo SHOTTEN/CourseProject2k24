@@ -13,23 +13,16 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace DishesApplication
+namespace DishesApplication.Pages
 {
 	/// <summary>
-	/// Логика взаимодействия для MainWindow.xaml
+	/// Логика взаимодействия для ManagerPage.xaml
 	/// </summary>
-	public partial class MainWindow : Window
+	public partial class ManagerPage : Page
 	{
-		public MainWindow()
+		public ManagerPage()
 		{
 			InitializeComponent();
 		}
-
-		private void SignInGuest(object sender, RoutedEventArgs e)
-		{
-			BaseWindow window = new BaseWindow();
-			window.Show();
-			Close();
-        }
-    }
+	}
 }

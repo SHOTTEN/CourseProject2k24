@@ -10,11 +10,11 @@ none
 false
 DEBUG;TRACE
 E:\2022 ДЭ Код 1-1\DishesApplication\App.xaml
-11343353237
+7-572508814
 
-6-1312943230
+121767476025
 13-38814620
-AuthorizationWindow.xaml;
+AuthorizationWindow.xaml;BaseWindow.xaml;Pages\AddProductPage.xaml;Pages\AdminProductsPage.xaml;Pages\ClientPage.xaml;Pages\EditPage.xaml;Pages\ManagerPage.xaml;
 
-False
+True
 
