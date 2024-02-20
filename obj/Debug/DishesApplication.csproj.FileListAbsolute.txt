@@ -18,3 +18,13 @@ E:\2022 ДЭ Код 1-1\DishesApplication\obj\Debug\AuthorizationWindow.baml
 E:\2022 ДЭ Код 1-1\DishesApplication\obj\Debug\BaseWindow.g.cs
 E:\2022 ДЭ Код 1-1\DishesApplication\obj\Debug\BaseWindow.baml
 E:\2022 ДЭ Код 1-1\DishesApplication\obj\Debug\GeneratedInternalTypeHelper.g.cs
+E:\2022 ДЭ Код 1-1\DishesApplication\obj\Debug\Pages\AddProductPage.g.cs
+E:\2022 ДЭ Код 1-1\DishesApplication\obj\Debug\Pages\AdminProductsPage.g.cs
+E:\2022 ДЭ Код 1-1\DishesApplication\obj\Debug\Pages\ClientPage.g.cs
+E:\2022 ДЭ Код 1-1\DishesApplication\obj\Debug\Pages\EditPage.g.cs
+E:\2022 ДЭ Код 1-1\DishesApplication\obj\Debug\Pages\ManagerPage.g.cs
+E:\2022 ДЭ Код 1-1\DishesApplication\obj\Debug\Pages\AddProductPage.baml
+E:\2022 ДЭ Код 1-1\DishesApplication\obj\Debug\Pages\AdminProductsPage.baml
+E:\2022 ДЭ Код 1-1\DishesApplication\obj\Debug\Pages\ClientPage.baml
+E:\2022 ДЭ Код 1-1\DishesApplication\obj\Debug\Pages\EditPage.baml
+E:\2022 ДЭ Код 1-1\DishesApplication\obj\Debug\Pages\ManagerPage.baml
