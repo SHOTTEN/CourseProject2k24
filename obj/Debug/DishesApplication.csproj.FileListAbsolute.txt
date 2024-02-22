@@ -17,7 +17,6 @@ E:\2022 ДЭ Код 1-1\DishesApplication\obj\Debug\AuthorizationWindow.g.cs
 E:\2022 ДЭ Код 1-1\DishesApplication\obj\Debug\AuthorizationWindow.baml
 E:\2022 ДЭ Код 1-1\DishesApplication\obj\Debug\BaseWindow.g.cs
 E:\2022 ДЭ Код 1-1\DishesApplication\obj\Debug\BaseWindow.baml
-E:\2022 ДЭ Код 1-1\DishesApplication\obj\Debug\GeneratedInternalTypeHelper.g.cs
 E:\2022 ДЭ Код 1-1\DishesApplication\obj\Debug\Pages\AddProductPage.g.cs
 E:\2022 ДЭ Код 1-1\DishesApplication\obj\Debug\Pages\AdminProductsPage.g.cs
 E:\2022 ДЭ Код 1-1\DishesApplication\obj\Debug\Pages\ClientPage.g.cs
@@ -28,3 +27,12 @@ E:\2022 ДЭ Код 1-1\DishesApplication\obj\Debug\Pages\AdminProductsPage.baml
 E:\2022 ДЭ Код 1-1\DishesApplication\obj\Debug\Pages\ClientPage.baml
 E:\2022 ДЭ Код 1-1\DishesApplication\obj\Debug\Pages\EditPage.baml
 E:\2022 ДЭ Код 1-1\DishesApplication\obj\Debug\Pages\ManagerPage.baml
+E:\2022 ДЭ Код 1-1\DishesApplication\bin\Debug\EntityFramework.dll
+E:\2022 ДЭ Код 1-1\DishesApplication\bin\Debug\EntityFramework.SqlServer.dll
+E:\2022 ДЭ Код 1-1\DishesApplication\bin\Debug\EntityFramework.xml
+E:\2022 ДЭ Код 1-1\DishesApplication\bin\Debug\EntityFramework.SqlServer.xml
+E:\2022 ДЭ Код 1-1\DishesApplication\bin\Debug\ru\EntityFramework.resources.dll
+E:\2022 ДЭ Код 1-1\DishesApplication\obj\Debug\Pages\BasketPage.g.cs
+E:\2022 ДЭ Код 1-1\DishesApplication\obj\Debug\DishesApplication_Content.g.cs
+E:\2022 ДЭ Код 1-1\DishesApplication\obj\Debug\Pages\BasketPage.baml
+E:\2022 ДЭ Код 1-1\DishesApplication\obj\Debug\DishesApplication.csproj.CopyComplete

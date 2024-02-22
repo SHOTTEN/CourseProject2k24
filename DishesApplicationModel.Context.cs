@@ -15,12 +15,23 @@ namespace DishesApplication
     
     public partial class DishesApplicationDBEntities : DbContext
     {
-        public DishesApplicationDBEntities()
+        private static DishesApplicationDBEntities _data;
+
+		public DishesApplicationDBEntities()
             : base("name=DishesApplicationDBEntities")
         {
         }
-    
-        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+
+		public static DishesApplicationDBEntities GetContext()
+		{
+			if (_data == null)
+			{
+				_data = new DishesApplicationDBEntities();
+			}
+			return _data;
+		}
+
+		protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             throw new UnintentionalCodeFirstException();
         }
