@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.Design;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -23,6 +24,17 @@ namespace DishesApplication.Pages
 		public AdminProductsPage()
 		{
 			InitializeComponent();
+			var currentProducts = DishesApplicationDBEntities.GetContext().Products.ToList();
+			lvProducts.ItemsSource = currentProducts;
 		}
+
+		private void btnExit(object sender, RoutedEventArgs e)
+		{
+			MainWindow window = new MainWindow();
+			window.Show();
+			Window parentWindow = Window.GetWindow(this);
+			parentWindow.Close();
+		}
+
 	}
 }
