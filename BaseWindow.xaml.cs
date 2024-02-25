@@ -1,4 +1,5 @@
 ﻿using DishesApplication.Pages;
+using DishesApplication.Tools;
 using System.Linq;
 using System.Windows;
 
@@ -36,7 +37,7 @@ namespace DishesApplication
 					}
 				case Role.Guest:
 					{
-						MainFrame.Content = new ClientPage();
+						MainFrame.Content = new GuestPage();
 						break;
 					}
 			}

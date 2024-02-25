@@ -1,16 +1,15 @@
 ﻿using DishesApplication.Tools;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Navigation;
 
 namespace DishesApplication.Pages
 {
 	/// <summary>
-	/// Логика взаимодействия для ManagerPage.xaml
+	/// Логика взаимодействия для GuestPage.xaml
 	/// </summary>
-	public partial class ManagerPage : Page
+	public partial class GuestPage : Page
 	{
-		public ManagerPage()
+		public GuestPage()
 		{
 			InitializeComponent();
 			DishesApplicationDB.SetDataToListView(lvProducts);
@@ -18,20 +17,6 @@ namespace DishesApplication.Pages
 			DishesApplicationDB.FillComboBoxSorting(cbSort);
 		}
 
-		private void btnAddBasket(object sender, RoutedEventArgs e)
-		{
-
-        }
-
-		private void btnBasket(object sender, RoutedEventArgs e)
-		{
-			NavigationService.Navigate(new BasketPage());
-		}
-
-		private void btnOrders(object sender, RoutedEventArgs e)
-		{
-
-		}
 		private void cbFilter_SelectionChanged(object sender, SelectionChangedEventArgs e)
 		{
 			DishesApplicationDB.UpdateProducts(cbFilter, cbSort, tbPoisk, outputQuantityProducts, allQuantityProducts, lvProducts);
@@ -52,7 +37,6 @@ namespace DishesApplication.Pages
 			MainWindow window = new MainWindow();
 			window.Show();
 			Window parentWindow = Window.GetWindow(this);
-			Storage.SystemUser = null;
 			parentWindow.Close();
 		}
 	}

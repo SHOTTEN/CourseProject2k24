@@ -84,6 +84,9 @@
     <Compile Include="Orders.cs">
       <DependentUpon>DishesApplicationModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Pages\GuestPage.xaml.cs">
+      <DependentUpon>GuestPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="PickupPointAddresses.cs">
       <DependentUpon>DishesApplicationModel.tt</DependentUpon>
     </Compile>
@@ -102,6 +105,8 @@
     <Compile Include="sysdiagrams.cs">
       <DependentUpon>DishesApplicationModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Tools\DishesApplicationDB.cs" />
+    <Compile Include="Tools\Storage.cs" />
     <Compile Include="Users.cs">
       <DependentUpon>DishesApplicationModel.tt</DependentUpon>
     </Compile>
@@ -140,6 +145,10 @@
     <Page Include="Pages\EditPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Pages\GuestPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\ManagerPage.xaml">
       <Generator>MSBuild:Compile</Generator>

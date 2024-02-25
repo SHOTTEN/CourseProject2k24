@@ -1,4 +1,4 @@
-﻿<Page x:Class="DishesApplication.Pages.ManagerPage"
+﻿<Page x:Class="DishesApplication.Pages.GuestPage"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -7,7 +7,7 @@
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       FontFamily="Comic Sans MS"
-      Title="ManagerPage">
+      Title="GuestPage">
     <Page.Resources>
         <Style x:Key="GrayBackgroundStyle" TargetType="Grid">
             <Style.Triggers>
@@ -71,7 +71,7 @@
                         </StackPanel>
 
                         <StackPanel Grid.Column="3" VerticalAlignment="Center">
-                            <Button Template="{StaticResource ButtonTemplateProducts}" Content="Добавить в корзину" FontSize="18" Margin="0 0 10 20" Click="btnAddBasket"/>
+                            <Button Template="{StaticResource ButtonTemplateGuestBasket}" Content="Добавить в корзину" FontSize="18" Margin="0 0 10 20" ToolTip="Чтобы добавить в корзину, нужно авторизоваться"/>
                         </StackPanel>
                     </Grid>
                 </DataTemplate>
@@ -83,12 +83,8 @@
                 <ColumnDefinition></ColumnDefinition>
                 <ColumnDefinition></ColumnDefinition>
                 <ColumnDefinition></ColumnDefinition>
-                <ColumnDefinition></ColumnDefinition>
-                <ColumnDefinition></ColumnDefinition>
             </Grid.ColumnDefinitions>
-            <Button Template="{StaticResource ButtonTemplateBaseWindow}" Grid.Column="1" Background="Transparent" BorderBrush="Transparent" Foreground="White" Width="130" Padding="0" Content="Корзина" FontSize="12" Click="btnBasket"/>
-            <Button Template="{StaticResource ButtonTemplateBaseWindow}" Grid.Column="2" Background="Transparent" BorderBrush="Transparent" Foreground="White" Width="130" Padding="0" Content="Заказы клиентов" FontSize="12" Click="btnOrders"/>
-            <Button Template="{StaticResource ButtonTemplateBaseWindow}" Grid.Column="3" Background="Transparent" BorderBrush="Transparent" Foreground="White" Width="130" Padding="0" Content="Выйти" FontSize="12" Click="btnExit"/>
+            <Button Template="{StaticResource ButtonTemplateBaseWindow}" Grid.Column="1" Background="Transparent" BorderBrush="Transparent" Foreground="White" Width="130" Padding="0" Content="Авторизироваться" FontSize="12" Click="btnExit"/>
         </Grid>
     </Grid>
 </Page>

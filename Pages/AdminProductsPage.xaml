@@ -6,6 +6,8 @@
       xmlns:local="clr-namespace:DishesApplication.Pages"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
+      Loaded="Page_Loaded"
+      FontFamily="Comic Sans MS"
       Title="AdminProductsPage">
     <Page.Resources>
         <Style x:Key="GrayBackgroundStyle" TargetType="Grid">
@@ -26,13 +28,19 @@
             <ColumnDefinition></ColumnDefinition>
             <ColumnDefinition></ColumnDefinition>
             <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
         </Grid.ColumnDefinitions>
 
-        <TextBox x:Name="tbPoisk" Width="150" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" ></TextBox>
-        <ComboBox x:Name="cbSort" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Center" />
-        <ComboBox x:Name="cbFilter" DisplayMemberPath="TypeName" Grid.Row="0" Grid.Column="2" HorizontalAlignment="Center" RenderTransformOrigin="4.42,0.448" Cursor=""/>
+        <TextBox x:Name="tbPoisk" Width="150" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" TextChanged="tbPoisk_TextChanged"></TextBox>
+        <ComboBox x:Name="cbSort" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" SelectionChanged="cbSort_SelectionChanged"/>
+        <ComboBox x:Name="cbFilter" DisplayMemberPath="Name" Grid.Row="0" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center" SelectionChanged="cbFilter_SelectionChanged"/>
+        <StackPanel Orientation="Horizontal" Grid.Row="0" Grid.Column="3">
+            <TextBlock x:Name="outputQuantityProducts" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+            <TextBlock x:Name="allQuantityProducts" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+        </StackPanel>
+        
 
-        <ListView x:Name="lvProducts" Grid.Row="1" Grid.ColumnSpan="3" ScrollViewer.HorizontalScrollBarVisibility="Disabled" HorizontalContentAlignment="Stretch" >
+        <ListView x:Name="lvProducts" Grid.Row="1" Grid.ColumnSpan="4" ScrollViewer.HorizontalScrollBarVisibility="Disabled" HorizontalContentAlignment="Stretch" >
             <ListView.ItemTemplate>
                 <DataTemplate >
                     <Grid Style="{StaticResource GrayBackgroundStyle}">

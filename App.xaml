@@ -51,5 +51,12 @@
             </ControlTemplate.Triggers>
         </ControlTemplate>
 
+        <ControlTemplate x:Key="ButtonTemplateGuestBasket" TargetType="Button">
+            <Border x:Name="Border" BorderBrush="#888888" BorderThickness="1" CornerRadius="5"
+                    TextBlock.Foreground="#888888" Background="Transparent" Cursor="Help" Width="120" Height="25" TextBlock.FontSize="12" >
+                <ContentPresenter RecognizesAccessKey="True" HorizontalAlignment="Center" VerticalAlignment="Center"></ContentPresenter>
+            </Border>
+        </ControlTemplate>
+
     </Application.Resources>
 </Application>

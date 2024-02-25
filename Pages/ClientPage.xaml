@@ -6,9 +6,87 @@
       xmlns:local="clr-namespace:DishesApplication.Pages"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
+      FontFamily="Comic Sans MS"
       Title="ClientPage">
+    <Page.Resources>
+        <Style x:Key="GrayBackgroundStyle" TargetType="Grid">
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding ProductQuantityInStock}" Value="0">
+                    <Setter Property="Background" Value="LightGray"/>
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+    </Page.Resources>
+    <Grid Background="White">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="40"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
 
-    <Grid>
-        
+        <TextBox x:Name="tbPoisk" Width="150" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" TextChanged="tbPoisk_TextChanged"></TextBox>
+        <ComboBox x:Name="cbSort" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" SelectionChanged="cbSort_SelectionChanged"/>
+        <ComboBox x:Name="cbFilter" DisplayMemberPath="Name" Grid.Row="0" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center" SelectionChanged="cbFilter_SelectionChanged"/>
+        <StackPanel Orientation="Horizontal" Grid.Row="0" Grid.Column="3">
+            <TextBlock x:Name="outputQuantityProducts" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+            <TextBlock x:Name="allQuantityProducts" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+        </StackPanel>
+
+        <ListView x:Name="lvProducts" Grid.Row="1" Grid.ColumnSpan="4" ScrollViewer.HorizontalScrollBarVisibility="Disabled" HorizontalContentAlignment="Stretch" >
+            <ListView.ItemTemplate>
+                <DataTemplate >
+                    <Grid Style="{StaticResource GrayBackgroundStyle}">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="0.5*"/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+
+                        <Image Grid.Column="0" Source="/Resources/picture.png" Width="75" Height="75"/>
+
+                        <StackPanel Grid.Column="1" Orientation="Vertical"
+                                    VerticalAlignment="Center"
+                                    MaxWidth="400">
+                            <TextBlock Text="{Binding ProductName}"  FontSize="20"/>
+                            <TextBlock Text="{Binding ProductDescription}"
+                                       FontSize="14"
+                                       TextWrapping="Wrap"/>
+                            <TextBlock Text="{Binding Manufacturers.Name, StringFormat={}Производитель: {0}}" FontSize="16"/>
+                            <TextBlock Text="{Binding ProductCost, StringFormat={}{0} руб}" FontSize="16"/>
+                        </StackPanel>
+
+                        <StackPanel Grid.Column="2"
+                                    Orientation="Vertical"
+                                    HorizontalAlignment="Center"
+                                    VerticalAlignment="Center">
+                            <TextBlock Text="Осталось на складе" FontSize="16" Margin="0 0 0 10"/>
+                            <TextBlock Text="{Binding ProductQuantityInStock, StringFormat={}{0} шт}" FontSize="30" TextAlignment="Center" Margin="0 0 0 10"/>
+                        </StackPanel>
+
+                        <StackPanel Grid.Column="3" VerticalAlignment="Center">
+                            <Button Template="{StaticResource ButtonTemplateProducts}" Content="Добавить в корзину" FontSize="18" Margin="0 0 10 20" Click="btnAddBasket"/>
+                        </StackPanel>
+                    </Grid>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+
+        <Grid Grid.Row="2" Grid.ColumnSpan="4" Background="#FF76E383">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Button Template="{StaticResource ButtonTemplateBaseWindow}" Grid.Column="1" Background="Transparent" BorderBrush="Transparent" Foreground="White" Width="130" Padding="0" Content="Корзина" FontSize="12" Click="btnBasket"/>
+            <Button Template="{StaticResource ButtonTemplateBaseWindow}" Grid.Column="2" Background="Transparent" BorderBrush="Transparent" Foreground="White" Width="130" Padding="0" Content="Выйти" FontSize="12" Click="btnExit"/>
+        </Grid>
     </Grid>
 </Page>

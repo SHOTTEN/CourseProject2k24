@@ -1,18 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.Design;
+﻿using DishesApplication.Tools;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace DishesApplication.Pages
 {
@@ -24,8 +13,13 @@ namespace DishesApplication.Pages
 		public AdminProductsPage()
 		{
 			InitializeComponent();
-			var currentProducts = DishesApplicationDBEntities.GetContext().Products.ToList();
-			lvProducts.ItemsSource = currentProducts;
+			DishesApplicationDB.SetDataToListView(lvProducts);
+			DishesApplicationDB.FillComboBoxFilter(cbFilter);
+			DishesApplicationDB.FillComboBoxSorting(cbSort);
+		}
+		private void Page_Loaded(object sender, RoutedEventArgs e)
+		{
+			DishesApplicationDB.UpdateProducts(cbFilter, cbSort, tbPoisk, outputQuantityProducts, allQuantityProducts, lvProducts);
 		}
 
 		private void btnExit(object sender, RoutedEventArgs e)
@@ -33,8 +27,23 @@ namespace DishesApplication.Pages
 			MainWindow window = new MainWindow();
 			window.Show();
 			Window parentWindow = Window.GetWindow(this);
+			Storage.SystemUser = null;
 			parentWindow.Close();
 		}
 
+		private void cbFilter_SelectionChanged(object sender, SelectionChangedEventArgs e)
+		{
+			DishesApplicationDB.UpdateProducts(cbFilter, cbSort, tbPoisk, outputQuantityProducts, allQuantityProducts, lvProducts);
+		}
+
+		private void cbSort_SelectionChanged(object sender, SelectionChangedEventArgs e)
+		{
+			DishesApplicationDB.UpdateProducts(cbFilter, cbSort, tbPoisk, outputQuantityProducts, allQuantityProducts, lvProducts);
+		}
+
+		private void tbPoisk_TextChanged(object sender, TextChangedEventArgs e)
+		{
+			DishesApplicationDB.UpdateProducts(cbFilter, cbSort, tbPoisk, outputQuantityProducts, allQuantityProducts, lvProducts);
+		}
 	}
 }
