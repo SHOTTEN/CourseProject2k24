@@ -47,6 +47,7 @@
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
     <Reference Include="System.Xml" />
@@ -68,47 +69,58 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="CategoryProducts.cs">
-      <DependentUpon>DishesApplicationModel.tt</DependentUpon>
+      <DependentUpon>DishesApplicationDBEntities.tt</DependentUpon>
     </Compile>
-    <Compile Include="DishesApplicationModel.cs">
+    <Compile Include="DishesApplicationDBEntities.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>DishesApplicationModel.tt</DependentUpon>
+      <DependentUpon>DishesApplicationDBEntities.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DishesApplicationDBEntities.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DishesApplicationDBEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DishesApplicationDBEntities.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DishesApplicationDBEntities.edmx</DependentUpon>
     </Compile>
     <Compile Include="Manufacturers.cs">
-      <DependentUpon>DishesApplicationModel.tt</DependentUpon>
+      <DependentUpon>DishesApplicationDBEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="OrderProducts.cs">
-      <DependentUpon>DishesApplicationModel.tt</DependentUpon>
+      <DependentUpon>DishesApplicationDBEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Orders.cs">
-      <DependentUpon>DishesApplicationModel.tt</DependentUpon>
+      <DependentUpon>DishesApplicationDBEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Pages\GuestPage.xaml.cs">
       <DependentUpon>GuestPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="PickupPointAddresses.cs">
-      <DependentUpon>DishesApplicationModel.tt</DependentUpon>
+      <DependentUpon>DishesApplicationDBEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Products.cs">
-      <DependentUpon>DishesApplicationModel.tt</DependentUpon>
+      <DependentUpon>DishesApplicationDBEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Providers.cs">
-      <DependentUpon>DishesApplicationModel.tt</DependentUpon>
+      <DependentUpon>DishesApplicationDBEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Roles.cs">
-      <DependentUpon>DishesApplicationModel.tt</DependentUpon>
+      <DependentUpon>DishesApplicationDBEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="StatusOrders.cs">
-      <DependentUpon>DishesApplicationModel.tt</DependentUpon>
+      <DependentUpon>DishesApplicationDBEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="sysdiagrams.cs">
-      <DependentUpon>DishesApplicationModel.tt</DependentUpon>
+      <DependentUpon>DishesApplicationDBEntities.tt</DependentUpon>
     </Compile>
+    <Compile Include="Tools\AddResizingImg.cs" />
     <Compile Include="Tools\DishesApplicationDB.cs" />
     <Compile Include="Tools\Storage.cs" />
     <Compile Include="Users.cs">
-      <DependentUpon>DishesApplicationModel.tt</DependentUpon>
+      <DependentUpon>DishesApplicationDBEntities.tt</DependentUpon>
     </Compile>
     <Page Include="AuthorizationWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -159,16 +171,6 @@
     <Compile Include="BaseWindow.xaml.cs">
       <DependentUpon>BaseWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="DishesApplicationModel.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>DishesApplicationModel.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DishesApplicationModel.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>DishesApplicationModel.edmx</DependentUpon>
-    </Compile>
     <Compile Include="Pages\AddProductPage.xaml.cs">
       <DependentUpon>AddProductPage.xaml</DependentUpon>
     </Compile>
@@ -204,12 +206,12 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EntityDeploy Include="DishesApplicationModel.edmx">
+    <EntityDeploy Include="DishesApplicationDBEntities.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>DishesApplicationModel.Designer.cs</LastGenOutput>
+      <LastGenOutput>DishesApplicationDBEntities.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <None Include="DishesApplicationModel.edmx.diagram">
-      <DependentUpon>DishesApplicationModel.edmx</DependentUpon>
+    <None Include="DishesApplicationDBEntities.edmx.diagram">
+      <DependentUpon>DishesApplicationDBEntities.edmx</DependentUpon>
     </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
@@ -227,20 +229,22 @@
     <Resource Include="Resources\logo.ico" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="DishesApplicationModel.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>DishesApplicationModel.Context.cs</LastGenOutput>
-      <DependentUpon>DishesApplicationModel.edmx</DependentUpon>
-    </Content>
-    <Content Include="DishesApplicationModel.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>DishesApplicationModel.edmx</DependentUpon>
-      <LastGenOutput>DishesApplicationModel.cs</LastGenOutput>
-    </Content>
     <Resource Include="Resources\picture.png" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="DishesApplicationDBEntities.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>DishesApplicationDBEntities.edmx</DependentUpon>
+      <LastGenOutput>DishesApplicationDBEntities.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="DishesApplicationDBEntities.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>DishesApplicationDBEntities.edmx</DependentUpon>
+      <LastGenOutput>DishesApplicationDBEntities.cs</LastGenOutput>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

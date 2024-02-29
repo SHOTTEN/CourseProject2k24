@@ -61,7 +61,7 @@
           <Property Name="ProductPhoto" Type="varchar(max)" />
           <Property Name="ManufacturerId" Type="int" Nullable="false" />
           <Property Name="ProviderId" Type="int" Nullable="false" />
-          <Property Name="ProductCost" Type="int" Nullable="false" />
+          <Property Name="ProductCost" Type="decimal" Precision="18" Scale="2" Nullable="false" />
           <Property Name="ProductDiscountAmount" Type="decimal" Precision="18" Scale="2" />
           <Property Name="MaxDiscount" Type="decimal" Precision="18" Scale="2" />
           <Property Name="CurrentDiscount" Type="decimal" Precision="18" Scale="2" />
@@ -329,7 +329,7 @@
           <Property Name="ProductPhoto" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="ManufacturerId" Type="Int32" Nullable="false" />
           <Property Name="ProviderId" Type="Int32" Nullable="false" />
-          <Property Name="ProductCost" Type="Int32" Nullable="false" />
+          <Property Name="ProductCost" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
           <Property Name="ProductDiscountAmount" Type="Decimal" Precision="18" Scale="2" />
           <Property Name="MaxDiscount" Type="Decimal" Precision="18" Scale="2" />
           <Property Name="CurrentDiscount" Type="Decimal" Precision="18" Scale="2" />

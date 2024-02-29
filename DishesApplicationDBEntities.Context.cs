@@ -15,13 +15,12 @@ namespace DishesApplication
     
     public partial class DishesApplicationDBEntities : DbContext
     {
-        private static DishesApplicationDBEntities _data;
+		private static DishesApplicationDBEntities _data;
 
 		public DishesApplicationDBEntities()
             : base("name=DishesApplicationDBEntities")
         {
         }
-
 		public static DishesApplicationDBEntities GetContext()
 		{
 			if (_data == null)

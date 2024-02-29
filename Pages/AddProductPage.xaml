@@ -6,9 +6,69 @@
       xmlns:local="clr-namespace:DishesApplication.Pages"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
+      FontFamily="Comis Sans MS"
       Title="AddProductPage">
-
     <Grid>
-        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="40"/>
+        </Grid.RowDefinitions>
+        <Grid Width="700" Margin="0 10" Grid.Row="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="230"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="230"/>
+            </Grid.ColumnDefinitions>
+            <TextBlock Grid.Row="0" Grid.Column="0" Text="Наименование товара" VerticalAlignment="Center" HorizontalAlignment="Right"/>
+            <TextBlock Grid.Row="1" Grid.Column="0" Text="Артикул" VerticalAlignment="Center" HorizontalAlignment="Right"/>
+            <TextBlock Grid.Row="2" Grid.Column="0" Text="Описание товара" VerticalAlignment="Center" HorizontalAlignment="Right"/>
+            <TextBlock Grid.Row="3" Grid.Column="0" Text="Категория товара" VerticalAlignment="Center" HorizontalAlignment="Right"/>
+            <TextBlock Grid.Row="4" Grid.Column="0" Text="Производитель" VerticalAlignment="Center" HorizontalAlignment="Right"/>
+            <TextBlock Grid.Row="5" Grid.Column="0" Text="Провайдер" VerticalAlignment="Center" HorizontalAlignment="Right"/>
+            <TextBlock Grid.Row="6" Grid.Column="0" Text="Цена"  VerticalAlignment="Center" HorizontalAlignment="Right"/>
+            <TextBlock Grid.Row="7" Grid.Column="0" Text="Наличие на складе"  VerticalAlignment="Center" HorizontalAlignment="Right"/>
+            <TextBlock Grid.Row="8" Grid.Column="0" Text="Скидка"  VerticalAlignment="Center" HorizontalAlignment="Right"/>
+            <TextBlock Grid.Row="9" Grid.Column="0" Text="Максимальная скидка"  VerticalAlignment="Center" HorizontalAlignment="Right"/>
+            <TextBlock Grid.Row="10" Grid.Column="0" Text="Текущая скидка"  VerticalAlignment="Center" HorizontalAlignment="Right"/>
+
+            <TextBox x:Name="tbProductName" Grid.Row="0" Text="{Binding ProductName}" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Width="200"></TextBox>
+            <TextBox x:Name="tbProductArticleNumber" Grid.Row="1" Text="{Binding ProductArticleNumber}" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Width="200" ></TextBox>
+            <TextBox x:Name="tbProductDescription" Grid.Row="2" Text="{Binding ProductDescription}" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Width="200"></TextBox>
+            <ComboBox x:Name="cbProductCategory" Grid.Row="3" Grid.Column= "1" HorizontalAlignment="Center" VerticalAlignment="Center" Width="200" DisplayMemberPath="Category"/>
+            <ComboBox x:Name="cbManufacturer" Grid.Row="4" Grid.Column= "1" HorizontalAlignment="Center" VerticalAlignment="Center" Width="200" DisplayMemberPath="Name"/>
+            <ComboBox x:Name="cbProvider" Grid.Row="5" Grid.Column= "1" HorizontalAlignment="Center" VerticalAlignment="Center" Width="200" DisplayMemberPath="Name"/>
+            <TextBox x:Name="tbProductCost" Grid.Row="6" Text="{Binding ProductCost}" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Width="200"></TextBox>
+            <TextBox x:Name="tbProductQuantityInStock" Grid.Row="7" Text="{Binding ProductQuantityInStock}" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Width="200"></TextBox>
+
+            <TextBox x:Name="tbProductDiscountAmount" Grid.Row="8" Text="{Binding ProductDiscountAmount}" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Width="200"></TextBox>
+            <TextBox x:Name="tbMaxDiscount" Grid.Row="9" Text="{Binding MaxDiscount}" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Width="200"></TextBox>
+            <TextBox x:Name="tbCurrentDiscount" Grid.Row="10" Text="{Binding CurrentDiscount}" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Width="200"></TextBox>
+
+            <Image x:Name="addProductImg" Grid.Row="0" Grid.Column="2" Grid.RowSpan="4" Width="200" Height="100"/>
+            <Button Grid.Row="4" Grid.Column="2" Template="{StaticResource ButtonTemplateBaseWindow}" Content="Выбрать изображение" Click="btnAdd_Image" FontSize="12"/>
+            <Button Grid.Row="6" Grid.Column="2" Template="{StaticResource ButtonTemplateBaseWindow}" HorizontalAlignment="Center" Content="Создать продукт" Click="btnSave_Product" FontSize="12"/>
+        </Grid>
+        <Grid Grid.Row="3" Background="#FF76E383">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Button Template="{StaticResource ButtonTemplateBaseWindow}" Grid.Column="1" Width="130" Content="Вернуться" FontSize="12" Click="btnExit"/>
+        </Grid>
     </Grid>
 </Page>

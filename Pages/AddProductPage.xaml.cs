@@ -1,17 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using DishesApplication.Tools;
+using System;
+using System.Globalization;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace DishesApplication.Pages
 {
@@ -20,9 +13,188 @@ namespace DishesApplication.Pages
 	/// </summary>
 	public partial class AddProductPage : Page
 	{
-		public AddProductPage()
+		private Products _currentProduct = new Products();
+		private string _logotypePath => AddResizingImg._logotypePath;
+		public AddProductPage(Products selectedProduct)
 		{
 			InitializeComponent();
+			cbProductCategory.ItemsSource = DishesApplicationDB.GetAllCategoryProducts();
+			cbManufacturer.ItemsSource = DishesApplicationDB.GetAllManufacturers();
+			cbProvider.ItemsSource = DishesApplicationDB.GetAllCategoryProviders();
+			cbProductCategory.SelectedIndex = 0;
+			cbManufacturer.SelectedIndex = 0;
+			cbProvider.SelectedIndex = 0;
+
+			if (selectedProduct != null)
+			{
+				_currentProduct = selectedProduct;
+			}
+			DataContext = _currentProduct;
+		}
+
+		private void btnAdd_Image(object sender, RoutedEventArgs e)
+		{
+			addProductImg.Source = AddResizingImg.AddImg(addProductImg.Source);
+		}
+
+		private void btnSave_Product(object sender, RoutedEventArgs e)
+		{
+			StringBuilder errors = Validation(out Products product);
+			if (errors.Length == 0)
+			{
+				try
+				{
+					using (var context = new DishesApplicationDBEntities())
+					{
+						Products findedProduct = context.Products.Find(_currentProduct.ProductArticleNumber);
+
+						if (findedProduct == null)
+						{
+							Products newProduct = new Products
+							{
+								ProductArticleNumber = product.ProductArticleNumber,
+								ProductName = product.ProductName,
+								ProductDescription = product.ProductDescription,
+								ProductCategoryId = (cbProductCategory.SelectedItem as CategoryProducts).CategoryId,
+								ManufacturerId = (cbManufacturer.SelectedItem as Manufacturers).ManufacturerId,
+								ProviderId = (cbProvider.SelectedItem as Providers).ProviderId,
+								ProductCost = product.ProductCost,
+								ProductQuantityInStock = product.ProductQuantityInStock,
+								ProductDiscountAmount = product.ProductDiscountAmount,
+								MaxDiscount = product.MaxDiscount,
+								CurrentDiscount = product.CurrentDiscount,
+								ProductPhoto = $"imgProducts\\{_logotypePath}"
+							};
+							context.Products.Add(newProduct);
+							context.SaveChanges();
+							MessageBox.Show("Успешно сохранено");
+							NavigationService.GoBack();
+						}
+					}
+				}
+				catch (Exception ex)
+				{
+					MessageBox.Show(ex.Message);
+				}
+			}
+			else
+			{
+				MessageBox.Show($"При заполнении товара " +
+				$"произошли следующие проблемы:\n\n{errors}", "Внимание!", MessageBoxButton.OK, MessageBoxImage.Error);
+			}
+		}
+
+		private void btnExit(object sender, RoutedEventArgs e)
+		{
+			NavigationService.GoBack();
+		}
+
+		private StringBuilder Validation(out Products product)
+		{
+			product = null;
+			StringBuilder errors = new StringBuilder();
+			if (string.IsNullOrEmpty(tbProductName.Text))
+				errors.AppendLine("Вы не указали наименование продукта");
+			if (string.IsNullOrEmpty(tbProductArticleNumber.Text))
+				errors.AppendLine("Вы не указали артикул продукта");
+			if (string.IsNullOrEmpty(tbProductCost.Text))
+				errors.AppendLine("Вы не указали цену продукта");
+			if (string.IsNullOrEmpty(tbProductQuantityInStock.Text))
+				errors.AppendLine("Вы не указали остаток продукта на складе");
+
+			if (tbProductArticleNumber.Text.Length != 6)
+				errors.AppendLine("Артикул товара должен иметь 6 символов");
+
+			bool isProductCostParseSuccess = Double.TryParse(tbProductCost.Text.Replace(',', '.'), NumberStyles.Any, CultureInfo.InvariantCulture, out double parsedProductCost);
+			if (!isProductCostParseSuccess)
+			{
+				errors.AppendLine("Некоректное значение числа");
+				return errors;
+			}
+
+			if (parsedProductCost <= 0)
+				errors.AppendLine("Цена не может быть меньше или равной 0");
+
+			bool isProductQuantityInStockParseSuccess = Int32.TryParse(tbProductQuantityInStock.Text, out int parsedQuantityInStock);
+			if (parsedQuantityInStock < 0)
+				errors.AppendLine("Остаток на складе не может быть отрицательным");
+
+			decimal? parsedDiscountAmount = null;
+			decimal? parsedMaxDiscount = null;
+			decimal? parsedCurrentDiscount = null;
+
+			if (!string.IsNullOrWhiteSpace(tbProductDiscountAmount.Text))
+			{
+				bool isProductDiscountAmountParseSuccess = Decimal.TryParse(tbProductDiscountAmount.Text.Replace(',', '.'), NumberStyles.Any, CultureInfo.InvariantCulture, out decimal parsedDiscountAmountValue);
+				if (isProductDiscountAmountParseSuccess)
+				{
+					parsedDiscountAmount = parsedDiscountAmountValue;
+				}
+				else
+				{
+					errors.AppendLine("Некоректное значение скидки");
+					return errors;
+				}
+
+				if (parsedDiscountAmount < 0 || parsedDiscountAmount >= 99)
+				{
+					errors.AppendLine("Скидка не может быть отрицательной и не может превышать 99%");
+				}
+			}
+
+			if (!string.IsNullOrWhiteSpace(tbMaxDiscount.Text))
+			{
+				bool isMaxDiscountParseSuccess = Decimal.TryParse(tbMaxDiscount.Text.Replace(',', '.'), NumberStyles.Any, CultureInfo.InvariantCulture, out decimal parsedMaxDiscountValue);
+				if (isMaxDiscountParseSuccess)
+				{
+					parsedMaxDiscount = parsedMaxDiscountValue;
+				}
+				else
+				{
+					errors.AppendLine("Некоректное значение максимальной скидки");
+					return errors;
+				}
+
+				if (parsedMaxDiscount < 0 || parsedMaxDiscount >= 99)
+				{
+					errors.AppendLine("Максимальная скидка не может быть отрицательной и не может превышать 99%");
+				}
+			}
+
+			if (!string.IsNullOrWhiteSpace(tbCurrentDiscount.Text))
+			{
+				bool isCurrentDiscountParseSuccess = Decimal.TryParse(tbCurrentDiscount.Text.Replace(',', '.'), NumberStyles.Any, CultureInfo.InvariantCulture, out decimal parsedCurrentDiscountValue);
+				if (isCurrentDiscountParseSuccess)
+				{
+					parsedCurrentDiscount = parsedCurrentDiscountValue;
+				}
+				else
+				{
+					errors.AppendLine("Некоректное значение текущей скидки");
+					return errors;
+				}
+
+				if (parsedCurrentDiscount < 0 || parsedCurrentDiscount >= 99)
+				{
+					errors.AppendLine("Текущая скидка не может быть отрицательной и не может превышать 99%");
+				}
+			}
+
+			product = new Products
+			{
+				ProductArticleNumber = tbProductArticleNumber.Text,
+				ProductName = tbProductName.Text,
+				ProductDescription = tbProductDescription.Text,
+				ProductCategoryId = (cbProductCategory.SelectedItem as CategoryProducts).CategoryId,
+				ManufacturerId = (cbManufacturer.SelectedItem as Manufacturers).ManufacturerId,
+				ProviderId = (cbProvider.SelectedItem as Providers).ProviderId,
+				ProductCost = Decimal.Parse(tbProductCost.Text),
+				ProductQuantityInStock = Int32.Parse(tbProductQuantityInStock.Text),
+				ProductDiscountAmount = parsedDiscountAmount,
+				MaxDiscount = parsedMaxDiscount,
+				CurrentDiscount = parsedCurrentDiscount
+			};
+			return errors;
 		}
 	}
 }

@@ -84,7 +84,7 @@
                 <ColumnDefinition></ColumnDefinition>
                 <ColumnDefinition></ColumnDefinition>
             </Grid.ColumnDefinitions>
-            <Button Template="{StaticResource ButtonTemplateBaseWindow}" Grid.Column="1" Background="Transparent" BorderBrush="Transparent" Foreground="White" Width="130" Padding="0" Content="Авторизироваться" FontSize="12" Click="btnExit"/>
+            <Button Template="{StaticResource ButtonTemplateBaseWindow}" Grid.Column="1" Foreground="White" Width="130" Padding="0" Content="Авторизироваться" FontSize="12" Click="btnExit"/>
         </Grid>
     </Grid>
 </Page>

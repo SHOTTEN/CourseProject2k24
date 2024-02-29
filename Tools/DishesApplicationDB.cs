@@ -14,7 +14,22 @@ namespace DishesApplication.Tools
 
 		public static List<Products> GetAllProduts()
 		{
-			return DishesApplicationDBEntities.GetContext().Products.ToList();		
+			return DishesApplicationDBEntities.GetContext().Products.ToList();
+		}
+
+		public static List<Manufacturers> GetAllManufacturers()
+		{
+			return DishesApplicationDBEntities.GetContext().Manufacturers.ToList();
+		}
+
+		public static List<CategoryProducts> GetAllCategoryProducts()
+		{
+			return DishesApplicationDBEntities.GetContext().CategoryProducts.ToList();
+		}
+
+		public static List<Providers> GetAllCategoryProviders()
+		{
+			return DishesApplicationDBEntities.GetContext().Providers.ToList();
 		}
 
 		public static void FillComboBoxFilter(ComboBox comboBox)

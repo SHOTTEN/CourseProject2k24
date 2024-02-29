@@ -11,15 +11,30 @@ namespace DishesApplication
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.IO;
+
     public partial class Products
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+		[System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Products()
         {
             this.OrderProducts = new HashSet<OrderProducts>();
         }
-    
+
+        public string LogotipSourse
+        {
+            get
+            {
+				string imgProductsSrc = $"{ProductPhoto}";
+                string allImgSrc = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, imgProductsSrc);
+
+				if (!File.Exists(allImgSrc))
+                    allImgSrc = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "imgProducts\\picture.png");
+
+				return allImgSrc;
+			}
+        }
+
         public string ProductArticleNumber { get; set; }
         public string ProductName { get; set; }
         public string ProductDescription { get; set; }
@@ -27,7 +42,7 @@ namespace DishesApplication
         public string ProductPhoto { get; set; }
         public int ManufacturerId { get; set; }
         public int ProviderId { get; set; }
-        public int ProductCost { get; set; }
+        public decimal ProductCost { get; set; }
         public Nullable<decimal> ProductDiscountAmount { get; set; }
         public Nullable<decimal> MaxDiscount { get; set; }
         public Nullable<decimal> CurrentDiscount { get; set; }

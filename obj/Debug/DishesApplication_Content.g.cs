@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("dishesapplicationmodel.context.tt")]
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("dishesapplicationmodel.tt")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("dishesapplicationdbentities.context.tt")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("dishesapplicationdbentities.tt")]
 
 
