@@ -10,11 +10,11 @@ none
 false
 DEBUG;TRACE
 E:\2022 ДЭ Код 1-1\DishesApplication\App.xaml
-912102974
+9-1168066846
 2-1180126623
-31841107881
+321198435909
 19480234691
-AuthorizationWindow.xaml;BaseWindow.xaml;Pages\AddProductPage.xaml;Pages\AdminProductsPage.xaml;Pages\BasketPage.xaml;Pages\ClientPage.xaml;Pages\EditPage.xaml;Pages\GuestPage.xaml;Pages\ManagerPage.xaml;
+AuthorizationWindow.xaml;BaseWindow.xaml;Pages\AddEditProductPage.xaml;Pages\AdminProductsPage.xaml;Pages\BasketPage.xaml;Pages\ClientPage.xaml;Pages\EditPage.xaml;Pages\GuestPage.xaml;Pages\ManagerPage.xaml;
 
-False
+True
 

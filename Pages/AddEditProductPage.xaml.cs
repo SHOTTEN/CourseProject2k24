@@ -4,6 +4,7 @@ using System.Globalization;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 using System.Windows.Navigation;
 
 namespace DishesApplication.Pages
@@ -11,11 +12,11 @@ namespace DishesApplication.Pages
 	/// <summary>
 	/// Логика взаимодействия для AddProductPage.xaml
 	/// </summary>
-	public partial class AddProductPage : Page
+	public partial class AddEditProductPage : Page
 	{
 		private Products _currentProduct = new Products();
 		private string _logotypePath => AddResizingImg._logotypePath;
-		public AddProductPage(Products selectedProduct)
+		public AddEditProductPage(Products selectedProduct)
 		{
 			InitializeComponent();
 			cbProductCategory.ItemsSource = DishesApplicationDB.GetAllCategoryProducts();
@@ -70,6 +71,27 @@ namespace DishesApplication.Pages
 							MessageBox.Show("Успешно сохранено");
 							NavigationService.GoBack();
 						}
+						else
+						{
+							if (findedProduct.ProductArticleNumber != tbProductArticleNumber.Text)
+							{
+								findedProduct.ProductArticleNumber = tbProductArticleNumber.Text;
+							}
+							findedProduct.ProductName = tbProductName.Text;
+							findedProduct.ProductDescription = tbProductDescription.Text;
+							findedProduct.ProductCategoryId = (cbProductCategory.SelectedItem as CategoryProducts).CategoryId;
+							findedProduct.ManufacturerId = (cbManufacturer.SelectedItem as Manufacturers).ManufacturerId;
+							findedProduct.ProviderId = (cbProvider.SelectedItem as Providers).ProviderId;
+							findedProduct.ProductCost = Decimal.Parse(tbProductCost.Text, CultureInfo.InvariantCulture);
+							findedProduct.ProductQuantityInStock = Convert.ToInt32(tbProductQuantityInStock.Text);
+							findedProduct.ProductDiscountAmount = Convert.ToDecimal(tbProductDiscountAmount.Text, CultureInfo.InvariantCulture);
+							findedProduct.MaxDiscount = Convert.ToDecimal(tbMaxDiscount.Text, CultureInfo.InvariantCulture);
+							findedProduct.CurrentDiscount = Convert.ToDecimal(tbCurrentDiscount.Text, CultureInfo.InvariantCulture);
+							findedProduct.ProductPhoto = $"imgProducts\\{_logotypePath}";
+							context.SaveChanges();
+							MessageBox.Show("Успешно изменено");
+							NavigationService.GoBack();
+						}
 					}
 				}
 				catch (Exception ex)
@@ -86,7 +108,11 @@ namespace DishesApplication.Pages
 
 		private void btnExit(object sender, RoutedEventArgs e)
 		{
-			NavigationService.GoBack();
+			if (MessageBox.Show("Вы точно хотите вернуться?\nВнесённые данные будут утеряны", "Назад",
+				MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
+			{
+				NavigationService.GoBack();
+			}
 		}
 
 		private StringBuilder Validation(out Products product)
@@ -105,7 +131,7 @@ namespace DishesApplication.Pages
 			if (tbProductArticleNumber.Text.Length != 6)
 				errors.AppendLine("Артикул товара должен иметь 6 символов");
 
-			bool isProductCostParseSuccess = Double.TryParse(tbProductCost.Text.Replace(',', '.'), NumberStyles.Any, CultureInfo.InvariantCulture, out double parsedProductCost);
+			bool isProductCostParseSuccess = Decimal.TryParse(tbProductCost.Text, NumberStyles.Any, CultureInfo.InvariantCulture, out decimal parsedProductCost);
 			if (!isProductCostParseSuccess)
 			{
 				errors.AppendLine("Некоректное значение числа");
@@ -125,7 +151,7 @@ namespace DishesApplication.Pages
 
 			if (!string.IsNullOrWhiteSpace(tbProductDiscountAmount.Text))
 			{
-				bool isProductDiscountAmountParseSuccess = Decimal.TryParse(tbProductDiscountAmount.Text.Replace(',', '.'), NumberStyles.Any, CultureInfo.InvariantCulture, out decimal parsedDiscountAmountValue);
+				bool isProductDiscountAmountParseSuccess = Decimal.TryParse(tbProductDiscountAmount.Text, NumberStyles.Any, CultureInfo.InvariantCulture, out decimal parsedDiscountAmountValue);
 				if (isProductDiscountAmountParseSuccess)
 				{
 					parsedDiscountAmount = parsedDiscountAmountValue;
@@ -144,7 +170,7 @@ namespace DishesApplication.Pages
 
 			if (!string.IsNullOrWhiteSpace(tbMaxDiscount.Text))
 			{
-				bool isMaxDiscountParseSuccess = Decimal.TryParse(tbMaxDiscount.Text.Replace(',', '.'), NumberStyles.Any, CultureInfo.InvariantCulture, out decimal parsedMaxDiscountValue);
+				bool isMaxDiscountParseSuccess = Decimal.TryParse(tbMaxDiscount.Text, NumberStyles.Any, CultureInfo.InvariantCulture, out decimal parsedMaxDiscountValue);
 				if (isMaxDiscountParseSuccess)
 				{
 					parsedMaxDiscount = parsedMaxDiscountValue;
@@ -163,7 +189,7 @@ namespace DishesApplication.Pages
 
 			if (!string.IsNullOrWhiteSpace(tbCurrentDiscount.Text))
 			{
-				bool isCurrentDiscountParseSuccess = Decimal.TryParse(tbCurrentDiscount.Text.Replace(',', '.'), NumberStyles.Any, CultureInfo.InvariantCulture, out decimal parsedCurrentDiscountValue);
+				bool isCurrentDiscountParseSuccess = Decimal.TryParse(tbCurrentDiscount.Text, NumberStyles.Any, CultureInfo.InvariantCulture, out decimal parsedCurrentDiscountValue);
 				if (isCurrentDiscountParseSuccess)
 				{
 					parsedCurrentDiscount = parsedCurrentDiscountValue;
@@ -180,21 +206,29 @@ namespace DishesApplication.Pages
 				}
 			}
 
-			product = new Products
-			{
-				ProductArticleNumber = tbProductArticleNumber.Text,
-				ProductName = tbProductName.Text,
-				ProductDescription = tbProductDescription.Text,
-				ProductCategoryId = (cbProductCategory.SelectedItem as CategoryProducts).CategoryId,
-				ManufacturerId = (cbManufacturer.SelectedItem as Manufacturers).ManufacturerId,
-				ProviderId = (cbProvider.SelectedItem as Providers).ProviderId,
-				ProductCost = Decimal.Parse(tbProductCost.Text),
-				ProductQuantityInStock = Int32.Parse(tbProductQuantityInStock.Text),
-				ProductDiscountAmount = parsedDiscountAmount,
-				MaxDiscount = parsedMaxDiscount,
-				CurrentDiscount = parsedCurrentDiscount
-			};
+				product = new Products
+				{
+					ProductArticleNumber = tbProductArticleNumber.Text,
+					ProductName = tbProductName.Text,
+					ProductDescription = tbProductDescription.Text,
+					ProductCategoryId = (cbProductCategory.SelectedItem as CategoryProducts).CategoryId,
+					ManufacturerId = (cbManufacturer.SelectedItem as Manufacturers).ManufacturerId,
+					ProviderId = (cbProvider.SelectedItem as Providers).ProviderId,
+					ProductCost = parsedProductCost,
+					ProductQuantityInStock = parsedQuantityInStock,
+					ProductDiscountAmount = parsedDiscountAmount,
+					MaxDiscount = parsedMaxDiscount,
+					CurrentDiscount = parsedCurrentDiscount
+				};
 			return errors;
+		}
+
+		private void tbProductCost_PreviewTextInput(object sender, TextCompositionEventArgs e)
+		{
+			if (e.Text == ",")
+			{
+				e.Handled = true;
+			}
 		}
 	}
 }

@@ -73,7 +73,7 @@
                         </StackPanel>
 
                         <StackPanel Grid.Column="3" VerticalAlignment="Center">
-                            <Button Template="{StaticResource ButtonTemplateProducts}" Content="Редактировать" FontSize="18" Margin="0 20 10 10"/>
+                            <Button Template="{StaticResource ButtonTemplateProducts}" Content="Редактировать" FontSize="18" Margin="0 20 10 10" Click="btnProductEdit" />
                             <Button Template="{StaticResource ButtonTemplateProducts}" Content="Удалить" FontSize="18" Margin="0 0 10 10" Click="btnProductDelete"/>
                             <Button Template="{StaticResource ButtonTemplateProducts}" Content="Добавить" FontSize="18" Margin="0 0 10 20"/>
                         </StackPanel>
@@ -92,7 +92,7 @@
 
             </Grid.ColumnDefinitions>
             <Button x:Name="btnAddAgent" Template="{StaticResource ButtonTemplateBaseWindow}" Grid.Column="1" Background="Transparent" BorderBrush="Transparent" Foreground="White" Width="130" Padding="0" Content="Корзина" FontSize="12"/>
-            <Button x:Name="btnExelFile" Template="{StaticResource ButtonTemplateBaseWindow}" Grid.Column="2" Background="Transparent" BorderBrush="Transparent" Foreground="White" Width="130" Padding="0" Content="Создать товар" FontSize="12" Click="btnAddProductPage"/>
+            <Button x:Name="btnExelFile" Template="{StaticResource ButtonTemplateBaseWindow}" Grid.Column="2" Background="Transparent" BorderBrush="Transparent" Foreground="White" Width="130" Padding="0" Content="Создать товар" FontSize="12" Click="btnProductAdd"/>
             <Button Template="{StaticResource ButtonTemplateBaseWindow}" Grid.Column="3" Background="Transparent" BorderBrush="Transparent" Foreground="White" Width="130" Padding="0" Content="Выйти" FontSize="12" Click="btnExit"/>
         </Grid>
     </Grid>

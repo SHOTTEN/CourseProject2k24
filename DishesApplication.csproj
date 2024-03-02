@@ -118,6 +118,7 @@
     </Compile>
     <Compile Include="Tools\AddResizingImg.cs" />
     <Compile Include="Tools\DishesApplicationDB.cs" />
+    <Compile Include="Tools\ProductBlank.cs" />
     <Compile Include="Tools\Storage.cs" />
     <Compile Include="Users.cs">
       <DependentUpon>DishesApplicationDBEntities.tt</DependentUpon>
@@ -138,7 +139,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Pages\AddProductPage.xaml">
+    <Page Include="Pages\AddEditProductPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -171,8 +172,8 @@
     <Compile Include="BaseWindow.xaml.cs">
       <DependentUpon>BaseWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\AddProductPage.xaml.cs">
-      <DependentUpon>AddProductPage.xaml</DependentUpon>
+    <Compile Include="Pages\AddEditProductPage.xaml.cs">
+      <DependentUpon>AddEditProductPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\AdminProductsPage.xaml.cs">
       <DependentUpon>AdminProductsPage.xaml</DependentUpon>

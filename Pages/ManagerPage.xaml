@@ -49,7 +49,7 @@
                             <ColumnDefinition/>
                         </Grid.ColumnDefinitions>
 
-                        <Image Grid.Column="0" Source="/Resources/picture.png" Width="75" Height="75"/>
+                        <Image Grid.Column="0" Source="{Binding LogotipSourse}" Width="75" Height="75"/>
 
                         <StackPanel Grid.Column="1" Orientation="Vertical"
                                     VerticalAlignment="Center"

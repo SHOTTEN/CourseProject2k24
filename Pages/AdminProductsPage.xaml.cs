@@ -47,9 +47,9 @@ namespace DishesApplication.Pages
 			DishesApplicationDB.UpdateProducts(cbFilter, cbSort, tbPoisk, outputQuantityProducts, allQuantityProducts, lvProducts);
 		}
 
-		private void btnAddProductPage(object sender, RoutedEventArgs e)
+		private void btnProductAdd(object sender, RoutedEventArgs e)
 		{
-			NavigationService.Navigate(new AddProductPage(null));
+			NavigationService.Navigate(new AddEditProductPage(null));
 		}
 
 		private void btnProductDelete(object sender, RoutedEventArgs e)
@@ -85,6 +85,11 @@ namespace DishesApplication.Pages
 				}
 			}
 			lvProducts.ItemsSource = DishesApplicationDBEntities.GetContext().Products.ToList();
+		}
+
+		private void btnProductEdit(object sender, RoutedEventArgs e)
+		{
+			NavigationService.Navigate(new AddEditProductPage((sender as Button).DataContext as Products));
 		}
 	}
 }
