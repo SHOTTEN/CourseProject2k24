@@ -14,14 +14,11 @@
     <Property Name="ManufacturerId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
   </EntityType>
-  <!--Ошибки, обнаруженные при создании:
-предупреждение 6002: В таблице или представлении "DishesApplicationDB.dbo.OrderProducts" не определен первичный ключ. Ключ был выведен, а определение таблицы или представления было создано в режиме только для чтения.-->
   <EntityType Name="OrderProducts">
     <Key>
-      <PropertyRef Name="OrderId" />
-      <PropertyRef Name="ProductArticleNumber" />
-      <PropertyRef Name="CountProduct" />
+      <PropertyRef Name="Id" />
     </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="OrderId" Type="int" Nullable="false" />
     <Property Name="ProductArticleNumber" Type="varchar" MaxLength="6" Nullable="false" />
     <Property Name="CountProduct" Type="int" Nullable="false" />
@@ -216,6 +213,7 @@
   <EntityContainer Name="Хранилище DishesApplicationDBModelContainer">
     <EntitySet Name="CategoryProducts" EntityType="Self.CategoryProducts" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Manufacturers" EntityType="Self.Manufacturers" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="OrderProducts" EntityType="Self.OrderProducts" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Orders" EntityType="Self.Orders" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="PickupPointAddresses" EntityType="Self.PickupPointAddresses" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Products" EntityType="Self.Products" Schema="dbo" store:Type="Tables" />
@@ -224,13 +222,6 @@
     <EntitySet Name="StatusOrders" EntityType="Self.StatusOrders" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="OrderProducts" EntityType="Self.OrderProducts" store:Type="Tables" store:Schema="dbo">
-      <DefiningQuery>SELECT 
-    [OrderProducts].[OrderId] AS [OrderId], 
-    [OrderProducts].[ProductArticleNumber] AS [ProductArticleNumber], 
-    [OrderProducts].[CountProduct] AS [CountProduct]
-    FROM [dbo].[OrderProducts] AS [OrderProducts]</DefiningQuery>
-    </EntitySet>
     <AssociationSet Name="FK_OrderProducts_Orders" Association="Self.FK_OrderProducts_Orders">
       <End Role="Orders" EntitySet="Orders" />
       <End Role="OrderProducts" EntitySet="OrderProducts" />

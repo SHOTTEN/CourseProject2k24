@@ -16,6 +16,17 @@
     <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
     <NavigationProperty Name="Products" Relationship="Self.FK_Products_Manufacturers" FromRole="Manufacturers" ToRole="Products" />
   </EntityType>
+  <EntityType Name="OrderProducts">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="OrderId" Type="Int32" Nullable="false" />
+    <Property Name="ProductArticleNumber" Type="String" MaxLength="6" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="CountProduct" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Orders" Relationship="Self.FK_OrderProducts_Orders" FromRole="OrderProducts" ToRole="Orders" />
+    <NavigationProperty Name="Products" Relationship="Self.FK_OrderProducts_Products" FromRole="OrderProducts" ToRole="Products" />
+  </EntityType>
   <EntityType Name="Orders">
     <Key>
       <PropertyRef Name="OrderId" />
@@ -109,18 +120,6 @@
     <NavigationProperty Name="Orders" Relationship="Self.FK_Orders_Users" FromRole="Users" ToRole="Orders" />
     <NavigationProperty Name="Roles" Relationship="Self.FK_Users_Roles" FromRole="Users" ToRole="Roles" />
   </EntityType>
-  <EntityType Name="OrderProducts">
-    <Key>
-      <PropertyRef Name="OrderId" />
-      <PropertyRef Name="ProductArticleNumber" />
-      <PropertyRef Name="CountProduct" />
-    </Key>
-    <Property Name="OrderId" Type="Int32" Nullable="false" />
-    <Property Name="ProductArticleNumber" Type="String" MaxLength="6" FixedLength="false" Unicode="false" Nullable="false" />
-    <Property Name="CountProduct" Type="Int32" Nullable="false" />
-    <NavigationProperty Name="Orders" Relationship="Self.FK_OrderProducts_Orders" FromRole="OrderProducts" ToRole="Orders" />
-    <NavigationProperty Name="Products" Relationship="Self.FK_OrderProducts_Products" FromRole="OrderProducts" ToRole="Products" />
-  </EntityType>
   <Association Name="FK_Products_CategoryProducts">
     <End Role="CategoryProducts" Type="Self.CategoryProducts" Multiplicity="1" />
     <End Role="Products" Type="Self.Products" Multiplicity="*" />
@@ -154,6 +153,18 @@
       </Principal>
       <Dependent Role="OrderProducts">
         <PropertyRef Name="OrderId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_OrderProducts_Products">
+    <End Role="Products" Type="Self.Products" Multiplicity="1" />
+    <End Role="OrderProducts" Type="Self.OrderProducts" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Products">
+        <PropertyRef Name="ProductArticleNumber" />
+      </Principal>
+      <Dependent Role="OrderProducts">
+        <PropertyRef Name="ProductArticleNumber" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -193,18 +204,6 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_OrderProducts_Products">
-    <End Role="Products" Type="Self.Products" Multiplicity="1" />
-    <End Role="OrderProducts" Type="Self.OrderProducts" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Products">
-        <PropertyRef Name="ProductArticleNumber" />
-      </Principal>
-      <Dependent Role="OrderProducts">
-        <PropertyRef Name="ProductArticleNumber" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="FK_Products_Providers">
     <End Role="Providers" Type="Self.Providers" Multiplicity="1" />
     <End Role="Products" Type="Self.Products" Multiplicity="*" />
@@ -232,6 +231,7 @@
   <EntityContainer Name="DishesApplicationDBEntities" annotation:LazyLoadingEnabled="true">
     <EntitySet Name="CategoryProducts" EntityType="Self.CategoryProducts" />
     <EntitySet Name="Manufacturers" EntityType="Self.Manufacturers" />
+    <EntitySet Name="OrderProducts" EntityType="Self.OrderProducts" />
     <EntitySet Name="Orders" EntityType="Self.Orders" />
     <EntitySet Name="PickupPointAddresses" EntityType="Self.PickupPointAddresses" />
     <EntitySet Name="Products" EntityType="Self.Products" />
@@ -240,7 +240,6 @@
     <EntitySet Name="StatusOrders" EntityType="Self.StatusOrders" />
     <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
     <EntitySet Name="Users" EntityType="Self.Users" />
-    <EntitySet Name="OrderProducts" EntityType="Self.OrderProducts" />
     <AssociationSet Name="FK_Products_CategoryProducts" Association="Self.FK_Products_CategoryProducts">
       <End Role="CategoryProducts" EntitySet="CategoryProducts" />
       <End Role="Products" EntitySet="Products" />
@@ -251,6 +250,10 @@
     </AssociationSet>
     <AssociationSet Name="FK_OrderProducts_Orders" Association="Self.FK_OrderProducts_Orders">
       <End Role="Orders" EntitySet="Orders" />
+      <End Role="OrderProducts" EntitySet="OrderProducts" />
+    </AssociationSet>
+    <AssociationSet Name="FK_OrderProducts_Products" Association="Self.FK_OrderProducts_Products">
+      <End Role="Products" EntitySet="Products" />
       <End Role="OrderProducts" EntitySet="OrderProducts" />
     </AssociationSet>
     <AssociationSet Name="FK_Orders_PickupPointAddresses" Association="Self.FK_Orders_PickupPointAddresses">
@@ -264,10 +267,6 @@
     <AssociationSet Name="FK_Orders_Users" Association="Self.FK_Orders_Users">
       <End Role="Users" EntitySet="Users" />
       <End Role="Orders" EntitySet="Orders" />
-    </AssociationSet>
-    <AssociationSet Name="FK_OrderProducts_Products" Association="Self.FK_OrderProducts_Products">
-      <End Role="Products" EntitySet="Products" />
-      <End Role="OrderProducts" EntitySet="OrderProducts" />
     </AssociationSet>
     <AssociationSet Name="FK_Products_Providers" Association="Self.FK_Products_Providers">
       <End Role="Providers" EntitySet="Providers" />

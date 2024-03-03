@@ -17,6 +17,16 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="OrderProducts">
+      <EntityTypeMapping TypeName="DishesApplicationDBModel.OrderProducts">
+        <MappingFragment StoreEntitySet="OrderProducts">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="OrderId" ColumnName="OrderId" />
+          <ScalarProperty Name="ProductArticleNumber" ColumnName="ProductArticleNumber" />
+          <ScalarProperty Name="CountProduct" ColumnName="CountProduct" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="Orders">
       <EntityTypeMapping TypeName="DishesApplicationDBModel.Orders">
         <MappingFragment StoreEntitySet="Orders">
@@ -101,15 +111,6 @@
           <ScalarProperty Name="Login" ColumnName="Login" />
           <ScalarProperty Name="Password" ColumnName="Password" />
           <ScalarProperty Name="UserRoleId" ColumnName="UserRoleId" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="OrderProducts">
-      <EntityTypeMapping TypeName="DishesApplicationDBModel.OrderProducts">
-        <MappingFragment StoreEntitySet="OrderProducts">
-          <ScalarProperty Name="OrderId" ColumnName="OrderId" />
-          <ScalarProperty Name="ProductArticleNumber" ColumnName="ProductArticleNumber" />
-          <ScalarProperty Name="CountProduct" ColumnName="CountProduct" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

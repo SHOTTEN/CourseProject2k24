@@ -25,7 +25,7 @@ namespace DishesApplication.Pages
 
 		private void btnBasket(object sender, RoutedEventArgs e)
 		{
-			NavigationService.Navigate(new BasketPage());
+			NavigationService.Navigate(new BasketPage(null));
 		}
 
 		private void btnOrders(object sender, RoutedEventArgs e)

@@ -6,9 +6,98 @@
       xmlns:local="clr-namespace:DishesApplication.Pages"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
+      FontFamily="Comic Sans MS"
       Title="BasketPage">
-
+    <Page.Resources>
+        <Style x:Key="GrayBackgroundStyle" TargetType="Grid">
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding ProductQuantityInStock}" Value="0">
+                    <Setter Property="Background" Value="LightGray"/>
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+    </Page.Resources>
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="40"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+
+        <ListView x:Name="lvProducts" Grid.Row="0" Grid.ColumnSpan="4" ScrollViewer.HorizontalScrollBarVisibility="Disabled" HorizontalContentAlignment="Stretch" >
+            <ListView.ItemTemplate>
+                <DataTemplate >
+                    <Grid Style="{StaticResource GrayBackgroundStyle}">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="0.5*"/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+
+                        <Image Grid.Column="0" Source="{Binding LogotipSourse}" Width="75" Height="75"/>
+
+                        <StackPanel Grid.Column="1" Orientation="Vertical"
+                                    VerticalAlignment="Center"
+                                    MaxWidth="400">
+                            <TextBlock Text="{Binding ProductName}"  FontSize="20"/>
+                            <TextBlock Text="{Binding ProductDescription}"
+                                       FontSize="14"
+                                       TextWrapping="Wrap"/>
+                            <TextBlock Text="{Binding Manufacturers.Name, StringFormat={}Производитель: {0}}" FontSize="16"/>
+                            <TextBlock Text="{Binding ProductCost, StringFormat={}{0} руб}" FontSize="16"/>
+                        </StackPanel>
+
+                        <StackPanel Grid.Column="2"
+                                    Orientation="Vertical"
+                                    HorizontalAlignment="Center"
+                                    VerticalAlignment="Center">
+                            <TextBlock Text="Осталось на складе" FontSize="16" Margin="0 0 0 10"/>
+                            <TextBlock Text="{Binding ProductQuantityInStock, StringFormat={}{0} шт}" FontSize="30" TextAlignment="Center" Margin="0 0 0 10"/>
+                        </StackPanel>
+
+                        <StackPanel Grid.Column="3" VerticalAlignment="Center">
+                            <Button Template="{StaticResource ButtonTemplateProducts}"
+                                    Content="Удалить из корзины"
+                                    FontSize="18" Margin="0 20 10 10"
+                                    Click="btnDeleteFromBasket"/>
+                        </StackPanel>
+                    </Grid>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
         
+        <Grid Grid.Row="2" Grid.ColumnSpan="4" Background="#FF76E383">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            
+            <Button Template="{StaticResource ButtonTemplateBaseWindow}" 
+                    Grid.Column="1" Background="Transparent"
+                    BorderBrush="Transparent" Foreground="White"
+                    Width="130" Padding="0" Content="Вернуться"
+                    FontSize="12" Click="btnExit"/>
+
+            <Button Template="{StaticResource ButtonTemplateBaseWindow}" 
+                    Grid.Column="2" Background="Transparent"
+                    BorderBrush="Transparent" Foreground="White"
+                    Width="130" Padding="0" Content="Оформить заказ"
+                    FontSize="12" Click="btnFormOrder"/>
+
+            <ComboBox x:Name="cbPickupPoint"
+                      Grid.Column= "3" HorizontalAlignment="Center"
+                      VerticalAlignment="Center"
+                      DisplayMemberPath="PickupPointAddress"/>
+
+        </Grid>
     </Grid>
 </Page>

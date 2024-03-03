@@ -14,6 +14,7 @@ namespace DishesApplication
     
     public partial class OrderProducts
     {
+        public int Id { get; set; }
         public int OrderId { get; set; }
         public string ProductArticleNumber { get; set; }
         public int CountProduct { get; set; }

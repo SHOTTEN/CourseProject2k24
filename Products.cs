@@ -15,27 +15,28 @@ namespace DishesApplication
 
     public partial class Products
     {
-		[System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Products()
         {
             this.OrderProducts = new HashSet<OrderProducts>();
         }
 
-        public string LogotipSourse
-        {
-            get
-            {
+		public string LogotipSourse
+		{
+			get
+			{
 				string imgProductsSrc = $"{ProductPhoto}";
-                string allImgSrc = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, imgProductsSrc);
+				string allImgSrc = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, imgProductsSrc);
 
 				if (!File.Exists(allImgSrc))
-                    allImgSrc = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "imgProducts\\picture.png");
+					allImgSrc = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "imgProducts\\picture.png");
 
 				return allImgSrc;
 			}
-        }
+		}
 
-        public string ProductArticleNumber { get; set; }
+
+		public string ProductArticleNumber { get; set; }
         public string ProductName { get; set; }
         public string ProductDescription { get; set; }
         public int ProductCategoryId { get; set; }

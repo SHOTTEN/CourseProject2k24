@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Controls;
 
@@ -30,6 +31,24 @@ namespace DishesApplication.Tools
 		public static List<Providers> GetAllCategoryProviders()
 		{
 			return DishesApplicationDBEntities.GetContext().Providers.ToList();
+		}
+
+		public static Int32 GetLastOrderCode()
+		{
+			List<Orders> orders = DishesApplicationDBEntities.GetContext().Orders.ToList();
+			Orders lastOrder = orders.LastOrDefault();
+
+			if (lastOrder != null)
+			{
+				return lastOrder.Code;
+			}
+
+			return 0;
+		}
+
+		public static List<PickupPointAddresses> GetAllPickupPointAddresses()
+		{
+			return DishesApplicationDBEntities.GetContext().PickupPointAddresses.ToList();
 		}
 
 		public static void FillComboBoxFilter(ComboBox comboBox)

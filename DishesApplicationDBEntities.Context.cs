@@ -21,6 +21,7 @@ namespace DishesApplication
             : base("name=DishesApplicationDBEntities")
         {
         }
+
 		public static DishesApplicationDBEntities GetContext()
 		{
 			if (_data == null)
@@ -37,6 +38,7 @@ namespace DishesApplication
     
         public virtual DbSet<CategoryProducts> CategoryProducts { get; set; }
         public virtual DbSet<Manufacturers> Manufacturers { get; set; }
+        public virtual DbSet<OrderProducts> OrderProducts { get; set; }
         public virtual DbSet<Orders> Orders { get; set; }
         public virtual DbSet<PickupPointAddresses> PickupPointAddresses { get; set; }
         public virtual DbSet<Products> Products { get; set; }
@@ -45,6 +47,5 @@ namespace DishesApplication
         public virtual DbSet<StatusOrders> StatusOrders { get; set; }
         public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
         public virtual DbSet<Users> Users { get; set; }
-        public virtual DbSet<OrderProducts> OrderProducts { get; set; }
     }
 }

@@ -4,9 +4,10 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="d31c8fd5d3274598b161e4f32e1a3bfe" Name="Diagram1">
+      <Diagram DiagramId="70c9e87359d04cb5b46b70e59594162e" Name="Diagram1">
         <EntityTypeShape EntityType="DishesApplicationDBModel.CategoryProducts" Width="1.5" PointX="0.75" PointY="3.625" IsExpanded="true" />
         <EntityTypeShape EntityType="DishesApplicationDBModel.Manufacturers" Width="1.5" PointX="0.75" PointY="6.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="DishesApplicationDBModel.OrderProducts" Width="1.5" PointX="5.25" PointY="3.25" IsExpanded="true" />
         <EntityTypeShape EntityType="DishesApplicationDBModel.Orders" Width="1.5" PointX="3" PointY="11.375" IsExpanded="true" />
         <EntityTypeShape EntityType="DishesApplicationDBModel.PickupPointAddresses" Width="1.5" PointX="0.75" PointY="9.25" IsExpanded="true" />
         <EntityTypeShape EntityType="DishesApplicationDBModel.Products" Width="1.5" PointX="3" PointY="2.375" IsExpanded="true" />
@@ -15,14 +16,13 @@
         <EntityTypeShape EntityType="DishesApplicationDBModel.StatusOrders" Width="1.5" PointX="0.75" PointY="11.625" IsExpanded="true" />
         <EntityTypeShape EntityType="DishesApplicationDBModel.sysdiagrams" Width="1.5" PointX="5.75" PointY="7" IsExpanded="true" />
         <EntityTypeShape EntityType="DishesApplicationDBModel.Users" Width="1.5" PointX="0.75" PointY="14" IsExpanded="true" />
-        <EntityTypeShape EntityType="DishesApplicationDBModel.OrderProducts" Width="1.5" PointX="5.25" PointY="3.375" IsExpanded="true" />
         <AssociationConnector Association="DishesApplicationDBModel.FK_Products_CategoryProducts" ManuallyRouted="false" />
         <AssociationConnector Association="DishesApplicationDBModel.FK_Products_Manufacturers" ManuallyRouted="false" />
         <AssociationConnector Association="DishesApplicationDBModel.FK_OrderProducts_Orders" ManuallyRouted="false" />
+        <AssociationConnector Association="DishesApplicationDBModel.FK_OrderProducts_Products" ManuallyRouted="false" />
         <AssociationConnector Association="DishesApplicationDBModel.FK_Orders_PickupPointAddresses" ManuallyRouted="false" />
         <AssociationConnector Association="DishesApplicationDBModel.FK_Orders_StatusOrders" ManuallyRouted="false" />
         <AssociationConnector Association="DishesApplicationDBModel.FK_Orders_Users" ManuallyRouted="false" />
-        <AssociationConnector Association="DishesApplicationDBModel.FK_OrderProducts_Products" ManuallyRouted="false" />
         <AssociationConnector Association="DishesApplicationDBModel.FK_Products_Providers" ManuallyRouted="false" />
         <AssociationConnector Association="DishesApplicationDBModel.FK_Users_Roles" ManuallyRouted="false" />
       </Diagram>

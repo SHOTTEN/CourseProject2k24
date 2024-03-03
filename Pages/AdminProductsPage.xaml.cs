@@ -1,5 +1,6 @@
 ﻿using DishesApplication.Tools;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
@@ -11,6 +12,8 @@ namespace DishesApplication.Pages
 	/// </summary>
 	public partial class AdminProductsPage : Page
 	{
+		private List<Products> _products = new List<Products>();
+
 		public AdminProductsPage()
 		{
 			InitializeComponent();
@@ -90,6 +93,23 @@ namespace DishesApplication.Pages
 		private void btnProductEdit(object sender, RoutedEventArgs e)
 		{
 			NavigationService.Navigate(new AddEditProductPage((sender as Button).DataContext as Products));
+		}
+
+		private void btnAddProductToBasket(object sender, RoutedEventArgs e)
+		{
+			Products product = (Products)((Button)sender).DataContext;
+			if (product.ProductQuantityInStock == 0)
+			{
+				MessageBox.Show("Вы не можете добавить закончившйся товар в корзину!", "Внимание!", MessageBoxButton.OK, MessageBoxImage.Error);
+				return;
+			}
+
+			_products.Add(product);
+		}
+
+		private void btnOpenBasket(object sender, RoutedEventArgs e)
+		{
+			NavigationService.Navigate(new BasketPage(_products));
 		}
 	}
 }
