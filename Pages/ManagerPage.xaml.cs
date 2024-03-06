@@ -13,7 +13,7 @@ namespace DishesApplication.Pages
 		public ManagerPage()
 		{
 			InitializeComponent();
-			DishesApplicationDB.SetDataToListView(lvProducts);
+			DishesApplicationDB.SetProductsDataToListView(lvProducts);
 			DishesApplicationDB.FillComboBoxFilter(cbFilter);
 			DishesApplicationDB.FillComboBoxSorting(cbSort);
 		}
@@ -30,8 +30,9 @@ namespace DishesApplication.Pages
 
 		private void btnOrders(object sender, RoutedEventArgs e)
 		{
-
+			NavigationService.Navigate(new OrdersPage());
 		}
+
 		private void cbFilter_SelectionChanged(object sender, SelectionChangedEventArgs e)
 		{
 			DishesApplicationDB.UpdateProducts(cbFilter, cbSort, tbPoisk, outputQuantityProducts, allQuantityProducts, lvProducts);

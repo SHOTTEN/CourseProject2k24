@@ -1,6 +1,7 @@
 ﻿using DishesApplication.Tools;
 using System;
 using System.Globalization;
+using System.Linq;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -9,13 +10,11 @@ using System.Windows.Navigation;
 
 namespace DishesApplication.Pages
 {
-	/// <summary>
-	/// Логика взаимодействия для AddProductPage.xaml
-	/// </summary>
 	public partial class AddEditProductPage : Page
 	{
 		private Products _currentProduct = new Products();
 		private string _logotypePath => AddResizingImg._logotypePath;
+
 		public AddEditProductPage(Products selectedProduct)
 		{
 			InitializeComponent();
@@ -30,6 +29,7 @@ namespace DishesApplication.Pages
 			{
 				_currentProduct = selectedProduct;
 			}
+
 			DataContext = _currentProduct;
 		}
 
@@ -47,7 +47,7 @@ namespace DishesApplication.Pages
 				{
 					using (var context = new DishesApplicationDBEntities())
 					{
-						Products findedProduct = context.Products.Find(_currentProduct.ProductArticleNumber);
+						Products findedProduct = context.Products.FirstOrDefault(p => p.ProductArticleNumber == _currentProduct.ProductArticleNumber);
 
 						if (findedProduct == null)
 						{
@@ -64,7 +64,7 @@ namespace DishesApplication.Pages
 								ProductDiscountAmount = product.ProductDiscountAmount,
 								MaxDiscount = product.MaxDiscount,
 								CurrentDiscount = product.CurrentDiscount,
-								ProductPhoto = $"imgProducts\\{_logotypePath}"
+								ProductPhoto = _logotypePath
 							};
 							context.Products.Add(newProduct);
 							context.SaveChanges();
@@ -84,10 +84,19 @@ namespace DishesApplication.Pages
 							findedProduct.ProviderId = (cbProvider.SelectedItem as Providers).ProviderId;
 							findedProduct.ProductCost = Decimal.Parse(tbProductCost.Text, CultureInfo.InvariantCulture);
 							findedProduct.ProductQuantityInStock = Convert.ToInt32(tbProductQuantityInStock.Text);
-							findedProduct.ProductDiscountAmount = Convert.ToDecimal(tbProductDiscountAmount.Text, CultureInfo.InvariantCulture);
-							findedProduct.MaxDiscount = Convert.ToDecimal(tbMaxDiscount.Text, CultureInfo.InvariantCulture);
-							findedProduct.CurrentDiscount = Convert.ToDecimal(tbCurrentDiscount.Text, CultureInfo.InvariantCulture);
-							findedProduct.ProductPhoto = $"imgProducts\\{_logotypePath}";
+
+							if (!String.IsNullOrWhiteSpace(tbProductDiscountAmount.Text))
+								findedProduct.ProductDiscountAmount = Convert.ToDecimal(tbProductDiscountAmount.Text, CultureInfo.InvariantCulture);
+
+							if (!String.IsNullOrWhiteSpace(tbMaxDiscount.Text))
+								findedProduct.MaxDiscount = Convert.ToDecimal(tbMaxDiscount.Text, CultureInfo.InvariantCulture);
+
+							if (!String.IsNullOrWhiteSpace(tbCurrentDiscount.Text))
+								findedProduct.CurrentDiscount = Convert.ToDecimal(tbCurrentDiscount.Text, CultureInfo.InvariantCulture);
+
+							findedProduct.ProductPhoto = _logotypePath;
+
+
 							context.SaveChanges();
 							MessageBox.Show("Успешно изменено");
 							NavigationService.GoBack();

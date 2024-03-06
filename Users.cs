@@ -9,6 +9,7 @@
 
 namespace DishesApplication
 {
+    using DishesApplication.Tools;
     using System;
     using System.Collections.Generic;
     
@@ -32,4 +33,15 @@ namespace DishesApplication
         public virtual ICollection<Orders> Orders { get; set; }
         public virtual Roles Roles { get; set; }
     }
+
+    public partial class Users
+    {
+        public String Fio => GetFio();
+
+		private string GetFio()
+		{
+			string fio = $"{Surname} {Name} {Patronomic}";
+			return fio;
+		}
+	}
 }

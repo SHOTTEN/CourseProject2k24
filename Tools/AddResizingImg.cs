@@ -20,10 +20,12 @@ namespace DishesApplication.Tools
 			{
 				string sourceFilePath = openFileDialog.FileName;
 				string fileName = Path.GetFileName(sourceFilePath);
-				string targetFilePath = Path.Combine(targetFolderPath, fileName);
+				string uniqFileName = $"{DateTime.UtcNow.Ticks.ToString()}_{fileName}";
+
+				string targetFilePath = Path.Combine(targetFolderPath, uniqFileName);
 				File.Copy(sourceFilePath, targetFilePath, true);
 
-				_logotypePath = $"{fileName}";
+				_logotypePath = $"{uniqFileName}";
 
 				ImageSourceConverter converter = new ImageSourceConverter();
 				addProductImg = (ImageSource)converter.ConvertFromString(sourceFilePath);

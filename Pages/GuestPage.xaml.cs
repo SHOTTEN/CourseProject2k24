@@ -12,7 +12,7 @@ namespace DishesApplication.Pages
 		public GuestPage()
 		{
 			InitializeComponent();
-			DishesApplicationDB.SetDataToListView(lvProducts);
+			DishesApplicationDB.SetProductsDataToListView(lvProducts);
 			DishesApplicationDB.FillComboBoxFilter(cbFilter);
 			DishesApplicationDB.FillComboBoxSorting(cbSort);
 		}

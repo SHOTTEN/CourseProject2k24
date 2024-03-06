@@ -10,6 +10,17 @@ namespace DishesApplication.Pages
 	/// <summary>
 	/// Логика взаимодействия для BasketPage.xaml
 	/// </summary>
+	public class OrderItem
+	{
+		public Products Product { get; set; }
+		public int Count { get; set; }
+
+		public OrderItem(Products products, int count)
+		{
+			Product = products;
+			Count = count;
+		}
+	}
 	public partial class BasketPage : Page
 	{
 		private List<Products> _products;
@@ -17,7 +28,14 @@ namespace DishesApplication.Pages
 		{
 			InitializeComponent();
 			_products = products;
-			lvProducts.ItemsSource = products;
+			OrderItem[] orderItems = _products.GroupBy(p => p.ProductArticleNumber).Select(group =>
+			{
+				Int32 count = group.Count();
+				var productsGroup = group.Select(g => g).ToArray();
+				return new OrderItem(productsGroup.First(), count);
+			}).ToArray();
+
+			lvProducts.ItemsSource = orderItems;
 			cbPickupPoint.ItemsSource = DishesApplicationDB.GetAllPickupPointAddresses();
 		}
 
@@ -43,7 +61,7 @@ namespace DishesApplication.Pages
 
 		private void btnFormOrder(object sender, RoutedEventArgs e)
 		{
-			if(cbPickupPoint.SelectedIndex == -1)
+			if (cbPickupPoint.SelectedIndex == -1)
 			{
 				MessageBox.Show("Вы не выбрали пункт выдачи товара!", "Внимание");
 				return;
@@ -51,7 +69,7 @@ namespace DishesApplication.Pages
 
 			try
 			{
-				using(var context = new DishesApplicationDBEntities())
+				using (var context = new DishesApplicationDBEntities())
 				{
 					Orders newOrder = new Orders
 					{

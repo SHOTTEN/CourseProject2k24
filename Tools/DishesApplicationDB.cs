@@ -7,15 +7,26 @@ namespace DishesApplication.Tools
 {
 	public static class DishesApplicationDB
 	{
-		public static void SetDataToListView(ListView listView)
+		public static void SetProductsDataToListView(ListView listView)
 		{
-			var data = GetAllProduts();
+			var data = GetAllProducts();
 			listView.ItemsSource = data;
 		}
 
-		public static List<Products> GetAllProduts()
+		public static void SetOrdersDataToListView(ListView listView)
+		{
+			var data = GetAllOrders();
+			listView.ItemsSource = data;
+		}
+
+		public static List<Products> GetAllProducts()
 		{
 			return DishesApplicationDBEntities.GetContext().Products.ToList();
+		}
+
+		public static List<Orders> GetAllOrders()
+		{
+			return DishesApplicationDBEntities.GetContext().Orders.ToList();
 		}
 
 		public static List<Manufacturers> GetAllManufacturers()
@@ -32,6 +43,10 @@ namespace DishesApplication.Tools
 		{
 			return DishesApplicationDBEntities.GetContext().Providers.ToList();
 		}
+		public static List<PickupPointAddresses> GetAllPickupPointAddresses()
+		{
+			return DishesApplicationDBEntities.GetContext().PickupPointAddresses.ToList();
+		}
 
 		public static Int32 GetLastOrderCode()
 		{
@@ -46,9 +61,11 @@ namespace DishesApplication.Tools
 			return 0;
 		}
 
-		public static List<PickupPointAddresses> GetAllPickupPointAddresses()
+		public static List<OrderProducts> GetAllOrderProducts(Orders selectedOrder)
 		{
-			return DishesApplicationDBEntities.GetContext().PickupPointAddresses.ToList();
+			return (from orderProduct in DishesApplicationDBEntities.GetContext().OrderProducts
+						 where orderProduct.OrderId == selectedOrder.OrderId
+					select orderProduct).ToList();
 		}
 
 		public static void FillComboBoxFilter(ComboBox comboBox)
@@ -73,7 +90,7 @@ namespace DishesApplication.Tools
 		)			
 		{
 			int countProductsQuantity = 0;
-			var currentProducts = GetAllProduts();
+			var currentProducts = GetAllProducts();
 			int totalProductsQuantity = currentProducts.Count();
 
 			if (cbFilter.SelectedIndex > 0)
@@ -83,7 +100,7 @@ namespace DishesApplication.Tools
 				currentProducts = currentProducts.Where(p => p.Manufacturers.Name.Contains(filter)).ToList();
 				countProductsQuantity = currentProducts.Count();
 			}
-			else currentProducts = GetAllProduts();
+			else currentProducts = GetAllProducts();
 			switch (cbSort.SelectedIndex)
 			{
 				case 1:

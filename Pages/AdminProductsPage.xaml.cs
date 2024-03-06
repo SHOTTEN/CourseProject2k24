@@ -1,7 +1,9 @@
 ﻿using DishesApplication.Tools;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -17,7 +19,7 @@ namespace DishesApplication.Pages
 		public AdminProductsPage()
 		{
 			InitializeComponent();
-			DishesApplicationDB.SetDataToListView(lvProducts);
+			DishesApplicationDB.SetProductsDataToListView(lvProducts);
 			DishesApplicationDB.FillComboBoxFilter(cbFilter);
 			DishesApplicationDB.FillComboBoxSorting(cbSort);
 		}
@@ -75,11 +77,11 @@ namespace DishesApplication.Pages
 							return;
 						}
 
-						Products productForRemove = context.Products.Find(productArticle);
-						context.Products.Remove(productForRemove);
+						Products productToRemove = context.Products.Find(productArticle);
+						context.Products.Remove(productToRemove);
 
 						context.SaveChanges();
-						MessageBox.Show("Записи успешно удалены!");
+						MessageBox.Show("Товар успешно удален!");
 					}
 				}
 				catch (Exception ex)

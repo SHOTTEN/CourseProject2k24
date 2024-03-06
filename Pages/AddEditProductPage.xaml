@@ -58,7 +58,7 @@
             <TextBox x:Name="tbMaxDiscount" Grid.Row="9" Text="{Binding MaxDiscount}" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Width="200" PreviewTextInput="tbProductCost_PreviewTextInput"></TextBox>
             <TextBox x:Name="tbCurrentDiscount" Grid.Row="10" Text="{Binding CurrentDiscount}" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Width="200" PreviewTextInput="tbProductCost_PreviewTextInput"></TextBox>
 
-            <Image x:Name="addProductImg" Grid.Row="0" Grid.Column="2" Grid.RowSpan="4" Width="200" Height="100"/>
+            <Image x:Name="addProductImg" Source="{Binding LogotipSourse}" Grid.Row="0" Grid.Column="2" Grid.RowSpan="4" Width="200" Height="100"/>
             <Button Grid.Row="4" Grid.Column="2" Template="{StaticResource ButtonTemplateBaseWindow}" Content="Выбрать изображение" Click="btnAdd_Image" FontSize="12"/>
             <Button Grid.Row="6" Grid.Column="2" Template="{StaticResource ButtonTemplateBaseWindow}" HorizontalAlignment="Center" Content="Создать продукт" Click="btnSave_Product" FontSize="12"/>
         </Grid>

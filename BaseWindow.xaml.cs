@@ -11,6 +11,7 @@ namespace DishesApplication
 	public partial class BaseWindow : Window
 	{
 		DishesApplicationDBEntities db = new DishesApplicationDBEntities();
+
 		public string Fio => GetFio();
 		public string UserRole => GetRole();
 
@@ -45,20 +46,14 @@ namespace DishesApplication
 		}
 
 		private string GetFio () {
-			Users user = Storage.SystemUser;
-			if (user == null)
-			{
-				return "Гость";
-			}
-			string fio = $"{user.Surname} {user.Name} {user.Patronomic}";
-			return fio;
+			if (Storage.SystemUser == null) return "Гость"; 
+
+			return Storage.SystemUser.Fio;
 		}
 
 		private string GetRole()
 		{
-			Users user = Storage.SystemUser;
-
-			string role = db.Roles.First(r => r.RoleId == user.UserRoleId).RoleName;
+			string role = db.Roles.First(r => r.RoleId == Storage.SystemUser.UserRoleId).RoleName;
 			role = $"{role}";
 			return role;
 		}

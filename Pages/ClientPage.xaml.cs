@@ -13,7 +13,7 @@ namespace DishesApplication.Pages
 		public ClientPage()
 		{
 			InitializeComponent();
-			DishesApplicationDB.SetDataToListView(lvProducts);
+			DishesApplicationDB.SetProductsDataToListView(lvProducts);
 			DishesApplicationDB.FillComboBoxFilter(cbFilter);
 			DishesApplicationDB.FillComboBoxSorting(cbSort);
 

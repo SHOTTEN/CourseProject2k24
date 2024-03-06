@@ -12,6 +12,7 @@ namespace DishesApplication
     using System;
     using System.Collections.Generic;
     using System.IO;
+    using System.Windows.Media.Animation;
 
     public partial class Products
     {
@@ -25,7 +26,7 @@ namespace DishesApplication
 		{
 			get
 			{
-				string imgProductsSrc = $"{ProductPhoto}";
+				string imgProductsSrc = $"imgProducts\\{ProductPhoto}";
 				string allImgSrc = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, imgProductsSrc);
 
 				if (!File.Exists(allImgSrc))
