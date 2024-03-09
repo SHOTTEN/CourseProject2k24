@@ -60,7 +60,7 @@
 
             <Image x:Name="addProductImg" Source="{Binding LogotipSourse}" Grid.Row="0" Grid.Column="2" Grid.RowSpan="4" Width="200" Height="100"/>
             <Button Grid.Row="4" Grid.Column="2" Template="{StaticResource ButtonTemplateBaseWindow}" Content="Выбрать изображение" Click="btnAdd_Image" FontSize="12"/>
-            <Button Grid.Row="6" Grid.Column="2" Template="{StaticResource ButtonTemplateBaseWindow}" HorizontalAlignment="Center" Content="Создать продукт" Click="btnSave_Product" FontSize="12"/>
+            <Button Grid.Row="6" Grid.Column="2" Template="{StaticResource ButtonTemplateBaseWindow}" HorizontalAlignment="Center" Content="Сохранить продукт" Click="btnSave_Product" FontSize="12"/>
         </Grid>
         <Grid Grid.Row="3" Background="#FF76E383">
             <Grid.ColumnDefinitions>

@@ -1,13 +1,9 @@
 ﻿using DishesApplication.Pages;
 using DishesApplication.Tools;
-using System.Linq;
 using System.Windows;
 
 namespace DishesApplication
 {
-	/// <summary>
-	/// Логика взаимодействия для BaseWindow.xaml
-	/// </summary>
 	public partial class BaseWindow : Window
 	{
 		DishesApplicationDBEntities db = new DishesApplicationDBEntities();
@@ -41,21 +37,28 @@ namespace DishesApplication
 						MainFrame.Content = new GuestPage();
 						break;
 					}
-			}
-			
+			}			
 		}
 
 		private string GetFio () {
-			if (Storage.SystemUser == null) return "Гость"; 
+			if (Storage.SystemUser == null) return ""; 
 
 			return Storage.SystemUser.Fio;
 		}
 
 		private string GetRole()
 		{
-			string role = db.Roles.First(r => r.RoleId == Storage.SystemUser.UserRoleId).RoleName;
-			role = $"{role}";
-			return role;
+			if (Storage.SystemUser == null) return "Гость";
+			return Storage.SystemUser.Roles.RoleName;
 		}
-	}
+
+		private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+		{
+			if (MessageBox.Show("Вы точно хотите вернуться?\nНесохранённые данные будут утеряны", "Выход",
+				MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.No)
+			{
+				e.Cancel = true;
+			}
+		}
+    }
 }

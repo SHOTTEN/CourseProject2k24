@@ -1,16 +1,12 @@
 ﻿using DishesApplication.Tools;
 using System;
 using System.Linq;
-using System.Runtime.Remoting.Contexts;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Navigation;
 
 namespace DishesApplication.Pages
 {
-	/// <summary>
-	/// Логика взаимодействия для OrderDetailsPage.xaml
-	/// </summary>
 	public partial class OrderDetailsPage : Page
 	{
 		private Orders _currentOrder = new Orders();

@@ -38,7 +38,7 @@
             <TextBlock x:Name="allQuantityProducts" VerticalAlignment="Center" HorizontalAlignment="Left"/>
         </StackPanel>
 
-        <ListView x:Name="lvProducts" Grid.Row="1" Grid.ColumnSpan="4" ScrollViewer.HorizontalScrollBarVisibility="Disabled" HorizontalContentAlignment="Stretch" >
+        <ListView x:Name="lvProducts" ItemsSource="{Binding Products}" Grid.Row="1" Grid.ColumnSpan="4" ScrollViewer.HorizontalScrollBarVisibility="Disabled" HorizontalContentAlignment="Stretch" >
             <ListView.ItemTemplate>
                 <DataTemplate >
                     <Grid Style="{StaticResource GrayBackgroundStyle}">

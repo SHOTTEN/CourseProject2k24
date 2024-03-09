@@ -96,7 +96,6 @@ namespace DishesApplication.Pages
 
 							findedProduct.ProductPhoto = _logotypePath;
 
-
 							context.SaveChanges();
 							MessageBox.Show("Успешно изменено");
 							NavigationService.GoBack();

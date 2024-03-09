@@ -1,15 +1,14 @@
 ﻿using DishesApplication.Tools;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Controls;
 
 namespace DishesApplication.Pages
 {
-	/// <summary>
-	/// Логика взаимодействия для BasketPage.xaml
-	/// </summary>
 	public class OrderItem
 	{
 		public Products Product { get; set; }
@@ -21,31 +20,64 @@ namespace DishesApplication.Pages
 			Count = count;
 		}
 	}
+
+	public class BasketPageViewModel : INotifyPropertyChanged
+	{
+		private List<OrderItem> _orderItems = new List<OrderItem>();
+		public List<OrderItem> OrderItems
+		{
+			get { return _orderItems; }
+			set
+			{
+				_orderItems = value;
+				OnPropertyChanged();
+			}
+		}
+
+		public event PropertyChangedEventHandler PropertyChanged;
+
+		public void OnPropertyChanged([CallerMemberName] string prop = "")
+		{
+			if (PropertyChanged != null)
+				PropertyChanged(this, new PropertyChangedEventArgs(prop));
+		}
+
+		public BasketPageViewModel(OrderItem[] products)
+		{
+			_orderItems = products.ToList();
+		}
+	}
+
 	public partial class BasketPage : Page
 	{
-		private List<Products> _products;
-		public BasketPage(List<Products> products)
+		private ProductsPageViewModel _productsViewModel;
+		private BasketPageViewModel _basketViewModel;
+
+		public BasketPage(ProductsPageViewModel productsViewModel)
 		{
 			InitializeComponent();
-			_products = products;
-			OrderItem[] orderItems = _products.GroupBy(p => p.ProductArticleNumber).Select(group =>
+			_productsViewModel = productsViewModel;
+			OrderItem[] orderItems = ConvertToOrderItems(_productsViewModel.BasketProduct.ToArray());
+
+			_basketViewModel = new BasketPageViewModel(orderItems);
+			DataContext = _basketViewModel;
+
+			cbPickupPoint.ItemsSource = DishesApplicationDB.GetAllPickupPointAddresses();
+		}
+
+		private OrderItem[] ConvertToOrderItems(Products[] products)
+		{
+			return products.GroupBy(p => p.ProductArticleNumber).Select(group =>
 			{
 				Int32 count = group.Count();
 				var productsGroup = group.Select(g => g).ToArray();
 				return new OrderItem(productsGroup.First(), count);
 			}).ToArray();
-
-			lvProducts.ItemsSource = orderItems;
-			cbPickupPoint.ItemsSource = DishesApplicationDB.GetAllPickupPointAddresses();
 		}
 
 		private void btnExit(object sender, RoutedEventArgs e)
 		{
-			if (MessageBox.Show("Вы точно хотите вернуться?\nТовары в корзине будут утеряны", "Назад",
-				MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
-			{
-				NavigationService.GoBack();
-			}
+			NavigationService.GoBack();
 		}
 
 		private void btnDeleteFromBasket(object sender, RoutedEventArgs e)
@@ -53,9 +85,8 @@ namespace DishesApplication.Pages
 			if (MessageBox.Show("Вы точно хотите удалить товар из корзины?\nДействие будет невозможно отменить!", "Назад",
 				MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
 			{
-				_products.Remove((Products)((Button)sender).DataContext);
-				lvProducts.ItemsSource = null;
-				lvProducts.ItemsSource = _products;
+				_productsViewModel.BasketProduct.Remove(((OrderItem)((Button)sender).DataContext).Product);
+				_basketViewModel.OrderItems = ConvertToOrderItems(_productsViewModel.BasketProduct.ToArray()).ToList();
 			}
 		}
 
@@ -83,24 +114,24 @@ namespace DishesApplication.Pages
 					context.Orders.Add(newOrder);
 					context.SaveChanges();
 
-					if (_products.Count > 0)
+					if (_basketViewModel.OrderItems.Count > 0)
 					{
-						foreach (var group in _products.GroupBy(p => p.ProductArticleNumber))
+						foreach(var orderItem in _basketViewModel.OrderItems)
 						{
-							int count = group.Count();
 							OrderProducts newOrderProduct = new OrderProducts
 							{
 								OrderId = newOrder.OrderId,
-								ProductArticleNumber = group.Key,
-								CountProduct = count,
+								ProductArticleNumber = orderItem.Product.ProductArticleNumber,
+								CountProduct = orderItem.Count,
 							};
 
 							context.OrderProducts.Add(newOrderProduct);
-						}
+						}						
 						context.SaveChanges();
 					}
 
 					MessageBox.Show("Заказ успешно оформлен!");
+					_productsViewModel.BasketProduct = new List<Products>();
 					NavigationService.GoBack();
 				}
 			}

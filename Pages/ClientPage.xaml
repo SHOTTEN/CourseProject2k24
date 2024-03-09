@@ -37,7 +37,7 @@
             <TextBlock x:Name="allQuantityProducts" VerticalAlignment="Center" HorizontalAlignment="Left"/>
         </StackPanel>
 
-        <ListView x:Name="lvProducts" Grid.Row="1" Grid.ColumnSpan="4" ScrollViewer.HorizontalScrollBarVisibility="Disabled" HorizontalContentAlignment="Stretch" >
+        <ListView x:Name="lvProducts" ItemsSource="{Binding Products}" Grid.Row="1" Grid.ColumnSpan="4" ScrollViewer.HorizontalScrollBarVisibility="Disabled" HorizontalContentAlignment="Stretch" >
             <ListView.ItemTemplate>
                 <DataTemplate >
                     <Grid Style="{StaticResource GrayBackgroundStyle}">
@@ -70,7 +70,7 @@
                         </StackPanel>
 
                         <StackPanel Grid.Column="3" VerticalAlignment="Center">
-                            <Button Template="{StaticResource ButtonTemplateProducts}" Content="Добавить в корзину" FontSize="18" Margin="0 0 10 20" Click="btnAddBasket"/>
+                            <Button Template="{StaticResource ButtonTemplateProducts}" Content="Добавить в корзину" FontSize="18" Margin="0 0 10 20" Click="btnAddProductToBasket"/>
                         </StackPanel>
                     </Grid>
                 </DataTemplate>

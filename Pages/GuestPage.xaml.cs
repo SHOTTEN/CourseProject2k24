@@ -4,40 +4,43 @@ using System.Windows.Controls;
 
 namespace DishesApplication.Pages
 {
-	/// <summary>
-	/// Логика взаимодействия для GuestPage.xaml
-	/// </summary>
 	public partial class GuestPage : Page
 	{
+		ProductsPageViewModel ViewModel { get; }
 		public GuestPage()
 		{
 			InitializeComponent();
-			DishesApplicationDB.SetProductsDataToListView(lvProducts);
+			var allProducts = DishesApplicationDB.GetAllProducts();
+			var viewModel = new ProductsPageViewModel(allProducts);
+
+			ViewModel = viewModel;
+			DataContext = ViewModel;
+
 			DishesApplicationDB.FillComboBoxFilter(cbFilter);
 			DishesApplicationDB.FillComboBoxSorting(cbSort);
 		}
 
 		private void cbFilter_SelectionChanged(object sender, SelectionChangedEventArgs e)
 		{
-			DishesApplicationDB.UpdateProducts(cbFilter, cbSort, tbPoisk, outputQuantityProducts, allQuantityProducts, lvProducts);
+			DishesApplicationDB.UpdateProducts(cbFilter, cbSort, tbPoisk, outputQuantityProducts, allQuantityProducts, ViewModel);
 		}
 
 		private void cbSort_SelectionChanged(object sender, SelectionChangedEventArgs e)
 		{
-			DishesApplicationDB.UpdateProducts(cbFilter, cbSort, tbPoisk, outputQuantityProducts, allQuantityProducts, lvProducts);
+			DishesApplicationDB.UpdateProducts(cbFilter, cbSort, tbPoisk, outputQuantityProducts, allQuantityProducts, ViewModel);
 		}
 
 		private void tbPoisk_TextChanged(object sender, TextChangedEventArgs e)
 		{
-			DishesApplicationDB.UpdateProducts(cbFilter, cbSort, tbPoisk, outputQuantityProducts, allQuantityProducts, lvProducts);
+			DishesApplicationDB.UpdateProducts(cbFilter, cbSort, tbPoisk, outputQuantityProducts, allQuantityProducts, ViewModel);
 		}
 
 		private void btnExit(object sender, RoutedEventArgs e)
 		{
-			MainWindow window = new MainWindow();
-			window.Show();
 			Window parentWindow = Window.GetWindow(this);
+			MainWindow window = new MainWindow();
 			parentWindow.Close();
+			window.Show();
 		}
 	}
 }

@@ -74,6 +74,7 @@
                 <ColumnDefinition/>
                 <ColumnDefinition/>
                 <ColumnDefinition/>
+                <ColumnDefinition/>
             </Grid.ColumnDefinitions>
 
             <Button Template="{StaticResource ButtonTemplateBaseWindow}" 
@@ -81,6 +82,12 @@
                     BorderBrush="Transparent" Foreground="White"
                     Width="130" Padding="0" Content="Вернуться"
                     FontSize="12" Click="btnExit"/>
+            
+            <Button Template="{StaticResource ButtonTemplateBaseWindow}" 
+                    Grid.Column="2" Background="Transparent"
+                    BorderBrush="Transparent" Foreground="White"
+                    Width="130" Padding="0" Content="Выгрузить в PDF"
+                    FontSize="12" Click="btnGeneratePdfFile"/>
         </Grid>
     </Grid>
 </Page>

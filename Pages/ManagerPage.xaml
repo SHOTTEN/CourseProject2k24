@@ -38,7 +38,7 @@
             <TextBlock x:Name="allQuantityProducts" VerticalAlignment="Center" HorizontalAlignment="Left"/>
         </StackPanel>
 
-        <ListView x:Name="lvProducts" Grid.Row="1" Grid.ColumnSpan="4" ScrollViewer.HorizontalScrollBarVisibility="Disabled" HorizontalContentAlignment="Stretch" >
+        <ListView ItemsSource="{Binding Products}" Grid.Row="1" Grid.ColumnSpan="4" ScrollViewer.HorizontalScrollBarVisibility="Disabled" HorizontalContentAlignment="Stretch" >
             <ListView.ItemTemplate>
                 <DataTemplate >
                     <Grid Style="{StaticResource GrayBackgroundStyle}">
@@ -71,7 +71,7 @@
                         </StackPanel>
 
                         <StackPanel Grid.Column="3" VerticalAlignment="Center">
-                            <Button Template="{StaticResource ButtonTemplateProducts}" Content="Добавить в корзину" FontSize="18" Margin="0 0 10 20" Click="btnAddBasket"/>
+                            <Button Template="{StaticResource ButtonTemplateProducts}" Content="Добавить в корзину" FontSize="18" Margin="0 0 10 20" Click="btnAddProductToBasket"/>
                         </StackPanel>
                     </Grid>
                 </DataTemplate>
@@ -86,7 +86,7 @@
                 <ColumnDefinition></ColumnDefinition>
                 <ColumnDefinition></ColumnDefinition>
             </Grid.ColumnDefinitions>
-            <Button Template="{StaticResource ButtonTemplateBaseWindow}" Grid.Column="1" Background="Transparent" BorderBrush="Transparent" Foreground="White" Width="130" Padding="0" Content="Корзина" FontSize="12" Click="btnBasket"/>
+            <Button Template="{StaticResource ButtonTemplateBaseWindow}" Grid.Column="1" Background="Transparent" BorderBrush="Transparent" Foreground="White" Width="130" Padding="0" Content="Корзина" FontSize="12" Click="btnOpenBasket"/>
             <Button Template="{StaticResource ButtonTemplateBaseWindow}" Grid.Column="2" Background="Transparent" BorderBrush="Transparent" Foreground="White" Width="130" Padding="0" Content="Заказы клиентов" FontSize="12" Click="btnOrders"/>
             <Button Template="{StaticResource ButtonTemplateBaseWindow}" Grid.Column="3" Background="Transparent" BorderBrush="Transparent" Foreground="White" Width="130" Padding="0" Content="Выйти" FontSize="12" Click="btnExit"/>
         </Grid>

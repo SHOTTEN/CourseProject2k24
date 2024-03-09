@@ -17,9 +17,11 @@ E:\2022 ДЭ Код 1-1\DishesApplication\obj\Debug\Pages\BasketPage.g.cs
 E:\2022 ДЭ Код 1-1\DishesApplication\obj\Debug\Pages\ClientPage.g.cs
 E:\2022 ДЭ Код 1-1\DishesApplication\obj\Debug\Pages\GuestPage.g.cs
 E:\2022 ДЭ Код 1-1\DishesApplication\obj\Debug\Pages\ManagerPage.g.cs
+E:\2022 ДЭ Код 1-1\DishesApplication\obj\Debug\Pages\OrderDetailsPage.g.cs
 E:\2022 ДЭ Код 1-1\DishesApplication\obj\Debug\Pages\OrdersPage.g.cs
 E:\2022 ДЭ Код 1-1\DishesApplication\obj\Debug\App.g.cs
 E:\2022 ДЭ Код 1-1\DishesApplication\obj\Debug\DishesApplication_Content.g.cs
+E:\2022 ДЭ Код 1-1\DishesApplication\obj\Debug\GeneratedInternalTypeHelper.g.cs
 E:\2022 ДЭ Код 1-1\DishesApplication\obj\Debug\DishesApplication_MarkupCompile.cache
 E:\2022 ДЭ Код 1-1\DishesApplication\obj\Debug\DishesApplication_MarkupCompile.lref
 E:\2022 ДЭ Код 1-1\DishesApplication\obj\Debug\App.baml
@@ -30,6 +32,7 @@ E:\2022 ДЭ Код 1-1\DishesApplication\obj\Debug\Pages\AdminProductsPage.baml
 E:\2022 ДЭ Код 1-1\DishesApplication\obj\Debug\Pages\BasketPage.baml
 E:\2022 ДЭ Код 1-1\DishesApplication\obj\Debug\Pages\GuestPage.baml
 E:\2022 ДЭ Код 1-1\DishesApplication\obj\Debug\Pages\ManagerPage.baml
+E:\2022 ДЭ Код 1-1\DishesApplication\obj\Debug\Pages\OrderDetailsPage.baml
 E:\2022 ДЭ Код 1-1\DishesApplication\obj\Debug\Pages\OrdersPage.baml
 E:\2022 ДЭ Код 1-1\DishesApplication\obj\Debug\DishesApplication.g.resources
 E:\2022 ДЭ Код 1-1\DishesApplication\obj\Debug\DishesApplication.Properties.Resources.resources
@@ -38,5 +41,7 @@ E:\2022 ДЭ Код 1-1\DishesApplication\obj\Debug\DishesApplication.csproj.Cor
 E:\2022 ДЭ Код 1-1\DishesApplication\obj\Debug\DishesApplication.csproj.CopyComplete
 E:\2022 ДЭ Код 1-1\DishesApplication\obj\Debug\DishesApplication.exe
 E:\2022 ДЭ Код 1-1\DishesApplication\obj\Debug\DishesApplication.pdb
-E:\2022 ДЭ Код 1-1\DishesApplication\obj\Debug\Pages\OrderDetailsPage.g.cs
-E:\2022 ДЭ Код 1-1\DishesApplication\obj\Debug\Pages\OrderDetailsPage.baml
+E:\2022 ДЭ Код 1-1\DishesApplication\bin\Debug\BouncyCastle.Crypto.dll
+E:\2022 ДЭ Код 1-1\DishesApplication\bin\Debug\itextsharp.dll
+E:\2022 ДЭ Код 1-1\DishesApplication\bin\Debug\itextsharp.xml
+E:\2022 ДЭ Код 1-1\DishesApplication\bin\Debug\ru\EntityFramework.SqlServer.resources.dll

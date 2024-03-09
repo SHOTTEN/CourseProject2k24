@@ -1,55 +1,86 @@
 ﻿using DishesApplication.Tools;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.IO;
 using System.Linq;
-using System.Threading.Tasks;
+using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Controls;
 
 namespace DishesApplication.Pages
 {
-	/// <summary>
-	/// Логика взаимодействия для AdminProductsPage.xaml
-	/// </summary>
-	public partial class AdminProductsPage : Page
+	public class ProductsPageViewModel : INotifyPropertyChanged
 	{
 		private List<Products> _products = new List<Products>();
+		public List<Products> Products
+		{
+			get { return _products; }
+			set
+			{
+				_products = value;
+				OnPropertyChanged();
+			}
+		}
+
+		private List<Products> _basketProduct = new List<Products>();
+		public List<Products> BasketProduct
+		{
+			get { return _basketProduct; }
+			set
+			{
+				_basketProduct = value;
+				OnPropertyChanged();
+			}
+		}
+
+		public event PropertyChangedEventHandler PropertyChanged;
+		public void OnPropertyChanged([CallerMemberName] string prop = "")
+		{
+			if (PropertyChanged != null)
+				PropertyChanged(this, new PropertyChangedEventArgs(prop));
+		}
+
+		public ProductsPageViewModel(List<Products> products)
+		{
+			_products = products;
+		}
+	}
+
+	public partial class AdminProductsPage : Page
+	{
+		ProductsPageViewModel ViewModel { get; }
 
 		public AdminProductsPage()
 		{
 			InitializeComponent();
-			DishesApplicationDB.SetProductsDataToListView(lvProducts);
+			var allProducts = DishesApplicationDB.GetAllProducts();
+			var viewModel = new ProductsPageViewModel(allProducts);
+
+			ViewModel = viewModel;
+			DataContext = ViewModel;
+
 			DishesApplicationDB.FillComboBoxFilter(cbFilter);
 			DishesApplicationDB.FillComboBoxSorting(cbSort);
 		}
 		private void Page_Loaded(object sender, RoutedEventArgs e)
 		{
-			DishesApplicationDB.UpdateProducts(cbFilter, cbSort, tbPoisk, outputQuantityProducts, allQuantityProducts, lvProducts);
-		}
-
-		private void btnExit(object sender, RoutedEventArgs e)
-		{
-			MainWindow window = new MainWindow();
-			window.Show();
-			Window parentWindow = Window.GetWindow(this);
-			Storage.SystemUser = null;
-			parentWindow.Close();
+			DishesApplicationDB.UpdateProducts(cbFilter, cbSort, tbPoisk, outputQuantityProducts, allQuantityProducts, ViewModel);
 		}
 
 		private void cbFilter_SelectionChanged(object sender, SelectionChangedEventArgs e)
 		{
-			DishesApplicationDB.UpdateProducts(cbFilter, cbSort, tbPoisk, outputQuantityProducts, allQuantityProducts, lvProducts);
+			DishesApplicationDB.UpdateProducts(cbFilter, cbSort, tbPoisk, outputQuantityProducts, allQuantityProducts, ViewModel);
 		}
 
 		private void cbSort_SelectionChanged(object sender, SelectionChangedEventArgs e)
 		{
-			DishesApplicationDB.UpdateProducts(cbFilter, cbSort, tbPoisk, outputQuantityProducts, allQuantityProducts, lvProducts);
+			DishesApplicationDB.UpdateProducts(cbFilter, cbSort, tbPoisk, outputQuantityProducts, allQuantityProducts, ViewModel);
 		}
 
 		private void tbPoisk_TextChanged(object sender, TextChangedEventArgs e)
 		{
-			DishesApplicationDB.UpdateProducts(cbFilter, cbSort, tbPoisk, outputQuantityProducts, allQuantityProducts, lvProducts);
+			DishesApplicationDB.UpdateProducts(cbFilter, cbSort, tbPoisk, outputQuantityProducts, allQuantityProducts, ViewModel);
 		}
 
 		private void btnProductAdd(object sender, RoutedEventArgs e)
@@ -71,7 +102,7 @@ namespace DishesApplication.Pages
 						string productArticle = product.ProductArticleNumber;
 
 						var orderProducts = context.OrderProducts.Where(op => op.ProductArticleNumber == productArticle);
-						if(orderProducts.Count() > 0)
+						if (orderProducts.Count() > 0)
 						{
 							MessageBox.Show("Произошла ошибка удаления!\n\nНеобходимо менеджеру удалить товары из заказов", "Внимание!", MessageBoxButton.OK, MessageBoxImage.Error);
 							return;
@@ -89,7 +120,10 @@ namespace DishesApplication.Pages
 					MessageBox.Show(ex.Message);
 				}
 			}
-			lvProducts.ItemsSource = DishesApplicationDBEntities.GetContext().Products.ToList();
+
+			ViewModel.Products = DishesApplicationDBEntities.GetContext().Products.ToList();
+
+			if (product.ProductPhoto != null && File.Exists(product.LogotipSourse)) File.Delete(product.LogotipSourse);
 		}
 
 		private void btnProductEdit(object sender, RoutedEventArgs e)
@@ -106,12 +140,20 @@ namespace DishesApplication.Pages
 				return;
 			}
 
-			_products.Add(product);
+			ViewModel.BasketProduct.Add(product);
 		}
 
 		private void btnOpenBasket(object sender, RoutedEventArgs e)
 		{
-			NavigationService.Navigate(new BasketPage(_products));
+			NavigationService.Navigate(new BasketPage(ViewModel));
+		}
+		private void btnExit(object sender, RoutedEventArgs e)
+		{
+			Window parentWindow = Window.GetWindow(this);
+			MainWindow window = new MainWindow();
+			parentWindow.Close();
+			window.Show();
+			Storage.SystemUser = null;
 		}
 	}
 }

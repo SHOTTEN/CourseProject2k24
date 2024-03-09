@@ -7,14 +7,18 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+using System;
+using System.Collections.Generic;
+using System.Globalization;
+using System.IO;
+using System.Windows.Data;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+
+
 namespace DishesApplication
 {
-    using System;
-    using System.Collections.Generic;
-    using System.IO;
-    using System.Windows.Media.Animation;
-
-    public partial class Products
+	public partial class Products
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Products()

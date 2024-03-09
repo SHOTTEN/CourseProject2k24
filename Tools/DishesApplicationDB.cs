@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DishesApplication.Pages;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Controls;
@@ -21,36 +22,37 @@ namespace DishesApplication.Tools
 
 		public static List<Products> GetAllProducts()
 		{
-			return DishesApplicationDBEntities.GetContext().Products.ToList();
+			
+			return DishesApplicationDBEntities.GetContext().Products.AsNoTracking().ToList();
 		}
 
 		public static List<Orders> GetAllOrders()
 		{
-			return DishesApplicationDBEntities.GetContext().Orders.ToList();
+			return DishesApplicationDBEntities.GetContext().Orders.AsNoTracking().ToList();
 		}
 
 		public static List<Manufacturers> GetAllManufacturers()
 		{
-			return DishesApplicationDBEntities.GetContext().Manufacturers.ToList();
+			return DishesApplicationDBEntities.GetContext().Manufacturers.AsNoTracking().ToList();
 		}
 
 		public static List<CategoryProducts> GetAllCategoryProducts()
 		{
-			return DishesApplicationDBEntities.GetContext().CategoryProducts.ToList();
+			return DishesApplicationDBEntities.GetContext().CategoryProducts.AsNoTracking().ToList();
 		}
 
 		public static List<Providers> GetAllCategoryProviders()
 		{
-			return DishesApplicationDBEntities.GetContext().Providers.ToList();
+			return DishesApplicationDBEntities.GetContext().Providers.AsNoTracking().ToList();
 		}
 		public static List<PickupPointAddresses> GetAllPickupPointAddresses()
 		{
-			return DishesApplicationDBEntities.GetContext().PickupPointAddresses.ToList();
+			return DishesApplicationDBEntities.GetContext().PickupPointAddresses.AsNoTracking().ToList();
 		}
 
 		public static Int32 GetLastOrderCode()
 		{
-			List<Orders> orders = DishesApplicationDBEntities.GetContext().Orders.ToList();
+			List<Orders> orders = GetAllOrders();
 			Orders lastOrder = orders.LastOrDefault();
 
 			if (lastOrder != null)
@@ -86,7 +88,7 @@ namespace DishesApplication.Tools
 
 		public static void UpdateProducts(ComboBox cbFilter, ComboBox cbSort, 
 			TextBox tbPoisk, TextBlock outputQuantityProducts, TextBlock allQuantityProducts,
-			ListView lvProducts
+			ProductsPageViewModel viewModel
 		)			
 		{
 			int countProductsQuantity = 0;
@@ -118,7 +120,7 @@ namespace DishesApplication.Tools
 			countProductsQuantity = currentProducts.Count();
 			outputQuantityProducts.Text = $"Найдено товаров: {countProductsQuantity}";
 			allQuantityProducts.Text = $" / {totalProductsQuantity} шт";
-			lvProducts.ItemsSource = currentProducts;
+			viewModel.Products = currentProducts;
 		}
 	}
 }
