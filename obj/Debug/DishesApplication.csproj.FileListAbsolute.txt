@@ -45,3 +45,7 @@ E:\2022 ДЭ Код 1-1\DishesApplication\obj\Debug\DishesApplication.csproj.Cor
 E:\2022 ДЭ Код 1-1\DishesApplication\obj\Debug\DishesApplication.csproj.CopyComplete
 E:\2022 ДЭ Код 1-1\DishesApplication\obj\Debug\DishesApplication.exe
 E:\2022 ДЭ Код 1-1\DishesApplication\obj\Debug\DishesApplication.pdb
+E:\2022 ДЭ Код 1-1\DishesApplication\bin\Debug\DishesApplication.exe.manifest
+E:\2022 ДЭ Код 1-1\DishesApplication\bin\Debug\DishesApplication.application
+E:\2022 ДЭ Код 1-1\DishesApplication\obj\Debug\DishesApplication.exe.manifest
+E:\2022 ДЭ Код 1-1\DishesApplication\obj\Debug\DishesApplication.application

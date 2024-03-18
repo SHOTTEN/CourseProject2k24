@@ -5,9 +5,9 @@ VisualStudioVersion = 17.4.33213.308
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DishesApplication", "DishesApplication.csproj", "{CC53EB03-484E-4DC6-AA8E-AA4C637722B8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SF2024User33Lib", "..\SF2024User33Lib\SF2024User33Lib.csproj", "{50EEDED7-602A-45E9-86E0-162CD147975A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SF2024User33Lib", "SF2024User33Lib\SF2024User33Lib.csproj", "{50EEDED7-602A-45E9-86E0-162CD147975A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTestDishesApplication", "..\UnitTestDishesApplication\UnitTestDishesApplication.csproj", "{20C42C5E-797E-4D81-8C35-B45508745EE1}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTestDishesApplication", "UnitTestDishesApplication\UnitTestDishesApplication.csproj", "{20C42C5E-797E-4D81-8C35-B45508745EE1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
