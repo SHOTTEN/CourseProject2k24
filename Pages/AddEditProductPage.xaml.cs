@@ -214,20 +214,20 @@ namespace DishesApplication.Pages
 				}
 			}
 
-				product = new Products
-				{
-					ProductArticleNumber = tbProductArticleNumber.Text,
-					ProductName = tbProductName.Text,
-					ProductDescription = tbProductDescription.Text,
-					ProductCategoryId = (cbProductCategory.SelectedItem as CategoryProducts).CategoryId,
-					ManufacturerId = (cbManufacturer.SelectedItem as Manufacturers).ManufacturerId,
-					ProviderId = (cbProvider.SelectedItem as Providers).ProviderId,
-					ProductCost = parsedProductCost,
-					ProductQuantityInStock = parsedQuantityInStock,
-					ProductDiscountAmount = parsedDiscountAmount,
-					MaxDiscount = parsedMaxDiscount,
-					CurrentDiscount = parsedCurrentDiscount
-				};
+			product = new Products
+			{
+				ProductArticleNumber = tbProductArticleNumber.Text,
+				ProductName = tbProductName.Text,
+				ProductDescription = tbProductDescription.Text,
+				ProductCategoryId = (cbProductCategory.SelectedItem as CategoryProducts).CategoryId,
+				ManufacturerId = (cbManufacturer.SelectedItem as Manufacturers).ManufacturerId,
+				ProviderId = (cbProvider.SelectedItem as Providers).ProviderId,
+				ProductCost = parsedProductCost,
+				ProductQuantityInStock = parsedQuantityInStock,
+				ProductDiscountAmount = parsedDiscountAmount,
+				MaxDiscount = parsedMaxDiscount,
+				CurrentDiscount = parsedCurrentDiscount
+			};
 			return errors;
 		}
 

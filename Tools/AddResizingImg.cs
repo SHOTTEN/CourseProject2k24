@@ -30,7 +30,7 @@ namespace DishesApplication.Tools
 				ImageSourceConverter converter = new ImageSourceConverter();
 				addProductImg = (ImageSource)converter.ConvertFromString(sourceFilePath);
 
-				if(addProductImg.Width > 500 && addProductImg.Height > 500)
+				if (addProductImg.Width > 500 && addProductImg.Height > 500)
 				{
 					MessageBox.Show("Картинка превышает 500x500 пикселей");
 					return null;

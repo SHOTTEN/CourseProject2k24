@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DishesApplication.Tools
 {
@@ -41,7 +37,7 @@ namespace DishesApplication.Tools
 
 		public static ProductBlank Empty()
 		{
-			return new ProductBlank (null, null, null, null, null, null, null, null, null, null, null, null);
+			return new ProductBlank(null, null, null, null, null, null, null, null, null, null, null, null);
 		}
 
 	}

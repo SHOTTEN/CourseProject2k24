@@ -116,7 +116,7 @@ namespace DishesApplication.Pages
 
 					if (_basketViewModel.OrderItems.Count > 0)
 					{
-						foreach(var orderItem in _basketViewModel.OrderItems)
+						foreach (var orderItem in _basketViewModel.OrderItems)
 						{
 							OrderProducts newOrderProduct = new OrderProducts
 							{
@@ -126,7 +126,7 @@ namespace DishesApplication.Pages
 							};
 
 							context.OrderProducts.Add(newOrderProduct);
-						}						
+						}
 						context.SaveChanges();
 					}
 

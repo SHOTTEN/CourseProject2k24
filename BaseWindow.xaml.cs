@@ -1,5 +1,6 @@
 ﻿using DishesApplication.Pages;
 using DishesApplication.Tools;
+using System;
 using System.Windows;
 
 namespace DishesApplication
@@ -10,6 +11,8 @@ namespace DishesApplication
 
 		public string Fio => GetFio();
 		public string UserRole => GetRole();
+
+		private Boolean IsForcedClose = false;
 
 		public BaseWindow(Role role)
 		{
@@ -37,11 +40,12 @@ namespace DishesApplication
 						MainFrame.Content = new GuestPage();
 						break;
 					}
-			}			
+			}
 		}
 
-		private string GetFio () {
-			if (Storage.SystemUser == null) return ""; 
+		private string GetFio()
+		{
+			if (Storage.SystemUser == null) return "";
 
 			return Storage.SystemUser.Fio;
 		}
@@ -54,11 +58,19 @@ namespace DishesApplication
 
 		private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
 		{
-			if (MessageBox.Show("Вы точно хотите вернуться?\nНесохранённые данные будут утеряны", "Выход",
+			if (IsForcedClose) return;
+
+			if (MessageBox.Show("Вы точно хотите выйти?\nНесохранённые данные будут утеряны", "Выход",
 				MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.No)
 			{
 				e.Cancel = true;
 			}
 		}
-    }
+
+		public void ForcedClose()
+		{
+			IsForcedClose = true;
+			Close();
+		}
+	}
 }

@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Windows;
+using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using Brushes = System.Drawing.Brushes;
@@ -31,7 +32,7 @@ namespace DishesApplication
 		{
 			InitializeComponent();
 			captchaTextBox.Source = GenerateCapthca();
-			DataContext = this; 
+			DataContext = this;
 		}
 
 		private void SignInGuest(object sender, RoutedEventArgs e)
@@ -186,6 +187,14 @@ namespace DishesApplication
 				}
 			}
 			return captchaImage;
+		}
+
+		private void Window_KeyDown(object sender, System.Windows.Input.KeyEventArgs e)
+		{
+			if (e.Key == Key.Enter)
+			{
+				SignInUser(sender, e);
+			}
 		}
 	}
 }

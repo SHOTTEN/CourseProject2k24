@@ -22,7 +22,7 @@ namespace DishesApplication.Tools
 
 		public static List<Products> GetAllProducts()
 		{
-			
+
 			return DishesApplicationDBEntities.GetContext().Products.AsNoTracking().ToList();
 		}
 
@@ -50,6 +50,11 @@ namespace DishesApplication.Tools
 			return DishesApplicationDBEntities.GetContext().PickupPointAddresses.AsNoTracking().ToList();
 		}
 
+		public static List<OrderProducts> GetAllOrderProducts()
+		{
+			return DishesApplicationDBEntities.GetContext().OrderProducts.AsNoTracking().ToList();
+		}
+
 		public static Int32 GetLastOrderCode()
 		{
 			List<Orders> orders = GetAllOrders();
@@ -66,7 +71,7 @@ namespace DishesApplication.Tools
 		public static List<OrderProducts> GetAllOrderProducts(Orders selectedOrder)
 		{
 			return (from orderProduct in DishesApplicationDBEntities.GetContext().OrderProducts
-						 where orderProduct.OrderId == selectedOrder.OrderId
+					where orderProduct.OrderId == selectedOrder.OrderId
 					select orderProduct).ToList();
 		}
 
@@ -86,10 +91,10 @@ namespace DishesApplication.Tools
 			comboBox.SelectedIndex = 0;
 		}
 
-		public static void UpdateProducts(ComboBox cbFilter, ComboBox cbSort, 
+		public static void UpdateProducts(ComboBox cbFilter, ComboBox cbSort,
 			TextBox tbPoisk, TextBlock outputQuantityProducts, TextBlock allQuantityProducts,
 			ProductsPageViewModel viewModel
-		)			
+		)
 		{
 			int countProductsQuantity = 0;
 			var currentProducts = GetAllProducts();

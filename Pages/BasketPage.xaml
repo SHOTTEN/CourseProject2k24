@@ -53,10 +53,10 @@
                         <StackPanel Grid.Column="3" VerticalAlignment="Center">
                             <Button Template="{StaticResource ButtonTemplateProducts}"
                                     Content="Удалить из корзины"
-                                    FontSize="20" Margin="0 20 10 10"
+                                    FontSize="20" Margin="0 20 0 10"
                                     Click="btnDeleteFromBasket"/>
-                            <Border BorderBrush="#498C51" BorderThickness="1" CornerRadius="5">
-                                <TextBlock Text="{Binding Count, StringFormat={}В корзине: {0} шт}" FontSize="16" TextAlignment="Center" Margin="1 2"/>
+                            <Border BorderBrush="#498C51" BorderThickness="1" CornerRadius="5" MaxWidth="180" Padding="2">
+                                <TextBlock Text="{Binding Count, StringFormat={}В корзине: {0} шт}" FontSize="16" TextAlignment="Center"/>
                             </Border>
                         </StackPanel>
                     </Grid>
@@ -85,7 +85,7 @@
                     Padding="0" Content="Оформить заказ"
                     FontSize="12" Click="btnFormOrder"/>
 
-            <ComboBox x:Name="cbPickupPoint"
+            <ComboBox x:Name="cbPickupPoint" Margin="0 0 20 0" Grid.ColumnSpan="2"
                       Grid.Column= "3" HorizontalAlignment="Center"
                       VerticalAlignment="Center"
                       DisplayMemberPath="PickupPointAddress"/>

@@ -37,9 +37,9 @@ namespace DishesApplication.Pages
 
 		private void btnExit(object sender, RoutedEventArgs e)
 		{
-			Window parentWindow = Window.GetWindow(this);
+			BaseWindow parentWindow = (BaseWindow)Window.GetWindow(this);
 			MainWindow window = new MainWindow();
-			parentWindow.Close();
+			parentWindow.ForcedClose();
 			window.Show();
 		}
 	}

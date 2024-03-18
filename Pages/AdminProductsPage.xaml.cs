@@ -12,6 +12,7 @@ namespace DishesApplication.Pages
 {
 	public class ProductsPageViewModel : INotifyPropertyChanged
 	{
+		private int Count { get; set; }
 		private List<Products> _products = new List<Products>();
 		public List<Products> Products
 		{
@@ -134,12 +135,18 @@ namespace DishesApplication.Pages
 		private void btnAddProductToBasket(object sender, RoutedEventArgs e)
 		{
 			Products product = (Products)((Button)sender).DataContext;
+			int productQuantityInBasket = ViewModel.BasketProduct.Count(p => p.ProductArticleNumber == product.ProductArticleNumber);
+
 			if (product.ProductQuantityInStock == 0)
 			{
 				MessageBox.Show("Вы не можете добавить закончившйся товар в корзину!", "Внимание!", MessageBoxButton.OK, MessageBoxImage.Error);
 				return;
 			}
-
+			if (productQuantityInBasket >= product.ProductQuantityInStock)
+			{
+				MessageBox.Show("Вы не можете добавить больше товара, чем есть на складе!", "Внимание!", MessageBoxButton.OK, MessageBoxImage.Error);
+				return;
+			}
 			ViewModel.BasketProduct.Add(product);
 		}
 
@@ -147,11 +154,18 @@ namespace DishesApplication.Pages
 		{
 			NavigationService.Navigate(new BasketPage(ViewModel));
 		}
+
 		private void btnExit(object sender, RoutedEventArgs e)
 		{
-			Window parentWindow = Window.GetWindow(this);
+			if (MessageBox.Show("Вы точно хотите выйти?\nНесохранённые данные будут утеряны", "Выход",
+				MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.No)
+			{
+				return;
+			}
+
+			BaseWindow parentWindow = (BaseWindow)Window.GetWindow(this);
 			MainWindow window = new MainWindow();
-			parentWindow.Close();
+			parentWindow.ForcedClose();
 			window.Show();
 			Storage.SystemUser = null;
 		}
